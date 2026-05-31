@@ -5,3 +5,4 @@ pylint
 mypy
 vermin
 pytest
+shellcheck-py

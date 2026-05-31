@@ -23,6 +23,10 @@ mapfile -t ALL_PY < <(find "$SCRIPT_DIR" -name "*.py" \
                            -not -path "*/aosp-dictionary-tools/*" \
                            -not -path "*/.git/*" | sort)
 mapfile -t TOP_PY < <(find "$SCRIPT_DIR" -maxdepth 1 -name "*.py" | sort)
+mapfile -t ALL_SH < <(find "$SCRIPT_DIR" -name "*.sh" \
+                           -not -path "*/.venv/*" \
+                           -not -path "*/aosp-dictionary-tools/*" \
+                           -not -path "*/.git/*" | sort)
 
 echo "--- flake8 ---"
 flake8 --max-line-length=100 --indent-size=2 "${ALL_PY[@]}"
@@ -45,6 +49,9 @@ mypy --strict "${TOP_PY[@]}"
 
 echo "--- vermin ---"
 vermin --target=3.7- --violations --no-tips "${ALL_PY[@]}"
+
+echo "--- shellcheck ---"
+shellcheck -x "${ALL_SH[@]}"
 
 echo "--- pytest ---"
 python3 -m pytest "$SCRIPT_DIR/tests/" --tb=short -v
