@@ -1,0 +1,3 @@
+[submodule "aosp-dictionary-tools"]
+	path = aosp-dictionary-tools
+	url = https://github.com/remi0s/aosp-dictionary-tools
