@@ -1,8 +1,8 @@
-flake8
-bandit
-vulture
-pylint
-mypy
-vermin
-pytest
-shellcheck-py
+flake8>=7
+bandit>=1.7
+vulture>=2.10
+pylint>=3.2
+mypy>=1.10
+vermin>=1.8
+pytest>=8
+shellcheck-py>=0.9
