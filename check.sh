@@ -45,3 +45,6 @@ mypy --strict "${TOP_PY[@]}"
 
 echo "--- vermin ---"
 vermin --target=3.7- --violations --no-tips "${ALL_PY[@]}"
+
+echo "--- pytest ---"
+python3 -m pytest "$SCRIPT_DIR/tests/" --tb=short -v
