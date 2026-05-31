@@ -1,0 +1,606 @@
+{
+  "locale": "da",
+  "description": "Kaomoji-ordbog",
+  "version": 1,
+  "kaomoji": {
+    "(◕‿◕)": [
+      "glad",
+      "sød",
+      "smile",
+      "smil"
+    ],
+    "(＾▽＾)": [
+      "glad",
+      "munter",
+      "glæde"
+    ],
+    "(^_^)": [
+      "glad",
+      "smile",
+      "smil",
+      "munter"
+    ],
+    "(─‿─)": [
+      "glad",
+      "tilfreds",
+      "salig"
+    ],
+    "(ᵔ◡ᵔ)": [
+      "glad",
+      "sød",
+      "smile",
+      "smil"
+    ],
+    "(•‿•)": [
+      "glad",
+      "sød",
+      "smile",
+      "smil"
+    ],
+    "(⌒‿⌒)": [
+      "glad",
+      "sød",
+      "smile",
+      "smil"
+    ],
+    "(◠‿◠✿)": [
+      "glad",
+      "sød",
+      "blomst"
+    ],
+    "ヽ(´▽｀)/": [
+      "glad",
+      "dans",
+      "fejre",
+      "fejrer",
+      "juhu",
+      "yay"
+    ],
+    "ヽ(•‿•)ノ": [
+      "glad",
+      "dans",
+      "fejre",
+      "fejrer"
+    ],
+    "♪～(´ε｀　)": [
+      "glad",
+      "syng",
+      "musik",
+      "dans"
+    ],
+    "٩(◕‿◕)۶": [
+      "glad",
+      "begejstret",
+      "fejre",
+      "fejrer"
+    ],
+    "★~(◡‿◡✿)": [
+      "glad",
+      "sød",
+      "dejlig"
+    ],
+    "(╥﹏╥)": [
+      "gråd",
+      "trist",
+      "tårer"
+    ],
+    "(｡ŏ﹏ŏ)": [
+      "gråd",
+      "trist",
+      "bekymret"
+    ],
+    "(T_T)": [
+      "gråd",
+      "trist",
+      "tårer"
+    ],
+    "(ಥ﹏ಥ)": [
+      "gråd",
+      "trist",
+      "hulkende",
+      "grædende"
+    ],
+    "(；д；)": [
+      "gråd",
+      "trist",
+      "tårer"
+    ],
+    "(ノ﹏ヽ)": [
+      "gråd",
+      "trist",
+      "sorry",
+      "undskyld"
+    ],
+    "(◕‿◕✿)": [
+      "kærlighed",
+      "sød",
+      "blomst"
+    ],
+    "(♥_♥)": [
+      "kærlighed",
+      "hjerte",
+      "elsker"
+    ],
+    "(❤‿❤)": [
+      "kærlighed",
+      "hjerte",
+      "sød"
+    ],
+    "(ɔˆ ³(ˆ⌣ˆc)": [
+      "kærlighed",
+      "kys",
+      "kram"
+    ],
+    "(づ｡◕‿‿◕｡)づ": [
+      "kram",
+      "kærlighed",
+      "putte"
+    ],
+    "♡(◕‿◕)♡": [
+      "kærlighed",
+      "hjerte",
+      "sød"
+    ],
+    "(╯°□°)╯︵┻━┻": [
+      "tableflip",
+      "flip",
+      "raseri",
+      "rage",
+      "vred",
+      "frustreret"
+    ],
+    "(ノಠ益ಠ)ノ": [
+      "tableflip",
+      "flip",
+      "vred",
+      "raseri",
+      "rage",
+      "frustreret"
+    ],
+    "(｀皿´)": [
+      "vred",
+      "sur",
+      "frustreret"
+    ],
+    "ಠ_ಠ": [
+      "misbilligelse",
+      "skuffet",
+      "dømmende",
+      "skeptisk"
+    ],
+    "(╬ Ò﹏Ó)": [
+      "vred",
+      "rasende",
+      "sur"
+    ],
+    "¯\\_(ツ)_/¯": [
+      "shrug",
+      "shrugging",
+      "ligemeget",
+      "sikkert"
+    ],
+    "¯\\_(⊙_⊙)_/¯": [
+      "shrug",
+      "forvirret",
+      "ligemeget",
+      "sikkert"
+    ],
+    "(⊙_⊙)": [
+      "overrasket",
+      "chokeret",
+      "forvirret"
+    ],
+    "(○o○)": [
+      "overrasket",
+      "chokeret",
+      "forbløffet"
+    ],
+    "(ﾟoﾟ)": [
+      "overrasket",
+      "chokeret",
+      "forbløffet"
+    ],
+    "(□_□)": [
+      "overrasket",
+      "chokeret",
+      "målløs"
+    ],
+    "(@_@)": [
+      "svimmel",
+      "forvirret",
+      "chokeret"
+    ],
+    "(￣▽￣)ノ": [
+      "vinke",
+      "vinker",
+      "hallo",
+      "hej",
+      "hello",
+      "hilsen",
+      "sej",
+      "fedt",
+      "cool"
+    ],
+    "(•̀ᴗ•́)و": [
+      "motiveret",
+      "beslutsom",
+      "ja",
+      "sej",
+      "fedt",
+      "cool"
+    ],
+    "ᕙ(▀̿̿Ĺ̯̿̿▀̿ ̿)ᕗ": [
+      "hård",
+      "sej",
+      "fedt",
+      "cool",
+      "beslutsom",
+      "badass"
+    ],
+    "(•̀ω•́)✧": [
+      "beslutsom",
+      "motiveret",
+      "ild"
+    ],
+    "ヽ(￣д￣;)ノ": [
+      "panik",
+      "bekymret",
+      "åh nej"
+    ],
+    "(；一_一)": [
+      "suk",
+      "træt",
+      "udmattet"
+    ],
+    "(－‸ლ)": [
+      "facepalm",
+      "skuffet",
+      "suk"
+    ],
+    "(╯˘～˘)╯": [
+      "søvnig",
+      "træt",
+      "godnat"
+    ],
+    "ʕ·ᴥ·ʔ": [
+      "bjørn",
+      "sød",
+      "fluffy",
+      "blød",
+      "blødt"
+    ],
+    "ʕっ•ᴥ•ʔっ": [
+      "bjørn",
+      "kram",
+      "sød"
+    ],
+    "(=^･ｪ･^=)": [
+      "kat",
+      "sød",
+      "mis",
+      "kattekilling",
+      "kitty"
+    ],
+    "(^・ω・^ )": [
+      "kat",
+      "sød",
+      "neko"
+    ],
+    "ᓚᘏᗢ": [
+      "kat",
+      "sød",
+      "mis",
+      "kattekilling",
+      "kitty",
+      "sidder"
+    ],
+    "(´• ω •`)": [
+      "hjort",
+      "sød",
+      "genert"
+    ],
+    "ᕦ(ò_óˇ)ᕤ": [
+      "stærk",
+      "beslutsom",
+      "kæmpe",
+      "fight",
+      "kamp"
+    ],
+    "(╯°□°)╯︵ʞɔɐᴉן∩": [
+      "tableflip",
+      "flip",
+      "raseri",
+      "rage",
+      "vred",
+      "frustreret"
+    ],
+    "(ノ°▽°)ノ": [
+      "begejstret",
+      "glad",
+      "hop"
+    ],
+    "(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧": [
+      "magi",
+      "magic",
+      "glitrer",
+      "sød",
+      "glad"
+    ],
+    "(◕‿◕)♡": [
+      "kærlighed",
+      "glad",
+      "sød"
+    ],
+    "(｡♥‿♥｡)": [
+      "kærlighed",
+      "nuttet",
+      "sød"
+    ],
+    "(◡‿◡)": [
+      "genert",
+      "sød",
+      "rødme",
+      "rødmer"
+    ],
+    "(⁄ ⁄>⁄ ▽ ⁄<⁄ ⁄)": [
+      "rødme",
+      "rødmer",
+      "flov",
+      "genert"
+    ],
+    "(ᗒᗨᗕ)": [
+      "flov",
+      "genert",
+      "akavet"
+    ],
+    "(▰˘◡˘▰)": [
+      "elsket",
+      "sød",
+      "tilfreds"
+    ],
+    "(¬_¬)": [
+      "skeptisk",
+      "dømmende",
+      "sideeye"
+    ],
+    "(￣▽￣)": [
+      "smug",
+      "selvsikker",
+      "smirk"
+    ],
+    "(◔_◔)": [
+      "sideeye",
+      "skeptisk",
+      "usikker"
+    ],
+    "(─.─||)": [
+      "målløs",
+      "skuffet",
+      "facepalm",
+      "suk"
+    ],
+    "＼(〇_ｏ)／": [
+      "overraskelse",
+      "chok",
+      "åh nej"
+    ],
+    "щ(ºДºщ)": [
+      "chok",
+      "overraskelse",
+      "no way"
+    ],
+    "┬─┬ノ(º_ºノ)": [
+      "tilbage",
+      "rolig",
+      "fikse",
+      "fix",
+      "ret",
+      "rette",
+      "bord"
+    ],
+    "(╮°-°)╮": [
+      "ligemeget",
+      "meh",
+      "nonchalant",
+      "shrug"
+    ],
+    "(︶︹︺)": [
+      "ked af det",
+      "træt",
+      "uimponeret"
+    ],
+    "(￣ω￣)": [
+      "smirk",
+      "tilfreds"
+    ],
+    "(◑‿◐)": [
+      "blink",
+      "legesyg",
+      "drillende"
+    ],
+    "(づ￣ ³￣)づ": [
+      "kram",
+      "kys",
+      "kærlighed",
+      "putte"
+    ],
+    "(っ˘̩╭╮˘̩)っ": [
+      "kram",
+      "trøst",
+      "trøster",
+      "støtte"
+    ],
+    "♡〜٩(^▿^)۶〜♡": [
+      "kærlighed",
+      "fejre",
+      "fejrer",
+      "glad"
+    ],
+    "✧･ﾟ: *✧･ﾟ:*": [
+      "glitrer",
+      "magi",
+      "magic",
+      "smuk"
+    ],
+    "(ノ◕ヮ◕)ノ*:･ﾟ✧": [
+      "glitrer",
+      "magi",
+      "magic",
+      "glad"
+    ],
+    "ヽ(｡◕‿◕｡)ﾉ": [
+      "glæde",
+      "fejre",
+      "fejrer",
+      "dans"
+    ],
+    "(^▽^)": [
+      "grin",
+      "grine",
+      "latter",
+      "glad",
+      "glæde"
+    ],
+    "╰(▔∀▔)╯": [
+      "fejre",
+      "fejrer",
+      "glad",
+      "dans"
+    ],
+    "(；￣Д￣)": [
+      "sved",
+      "nervøs",
+      "akavet",
+      "flov"
+    ],
+    "(；´Д｀)": [
+      "træt",
+      "udmattet",
+      "kæmper"
+    ],
+    "(/ω＼)": [
+      "flov",
+      "genert",
+      "rødme",
+      "rødmer"
+    ],
+    "(*/ω＼*)": [
+      "flov",
+      "rødme",
+      "rødmer",
+      "genert"
+    ],
+    "|･ω･)": [
+      "peek",
+      "titter",
+      "kigger",
+      "gemmer sig",
+      "genert"
+    ],
+    "ヾ(･ω･*)": [
+      "farvel",
+      "vinke",
+      "vinker"
+    ],
+    "(*￣▽￣)ﾉ": [
+      "vinke",
+      "vinker",
+      "hallo",
+      "hej",
+      "hello",
+      "farvel"
+    ],
+    "(-_-)ゞ": [
+      "undskyldende",
+      "sorry",
+      "undskyld",
+      "flov",
+      "fåret",
+      "sheepish"
+    ],
+    "(◔‿◔)": [
+      "interesseret",
+      "nysgerrig",
+      "legesyg",
+      "blink"
+    ],
+    "٩(｡•́‿•̀｡)۶": [
+      "begejstret",
+      "glad",
+      "sød"
+    ],
+    "(*^‿^*)": [
+      "glad",
+      "smile",
+      "smil",
+      "sød"
+    ],
+    "(✧ω✧)": [
+      "glitrer",
+      "begejstret",
+      "forbløffet"
+    ],
+    "＜（＾－＾）＞": [
+      "smile",
+      "smil",
+      "glad",
+      "venlig"
+    ],
+    "(´｡• ᵕ •｡`)": [
+      "sød",
+      "nuttet"
+    ],
+    "♡( ◡‿◡ )": [
+      "kærlighed",
+      "sød",
+      "rødme",
+      "rødmer",
+      "genert"
+    ],
+    "(◎_◎;)": [
+      "overrasket",
+      "chokeret",
+      "forvirret",
+      "svimmel"
+    ],
+    "(＞﹏＜)": [
+      "kæmper",
+      "sød",
+      "bedende",
+      "sorry",
+      "undskyld"
+    ],
+    "_(:3」∠)_": [
+      "doven",
+      "træt",
+      "død",
+      "søvnig"
+    ],
+    "(◞‸◟)": [
+      "trist",
+      "ensom",
+      "deprimeret",
+      "depri",
+      "gråd"
+    ],
+    "(；▽；)": [
+      "gråd",
+      "tårer",
+      "rørt",
+      "følelsesladet"
+    ],
+    "(๑•́ㅿ•̀๑)": [
+      "genert",
+      "flov",
+      "sød",
+      "rødme",
+      "rødmer"
+    ],
+    "(ᗒᗩᗕ)": [
+      "flov",
+      "genert",
+      "sød",
+      "forvirret"
+    ]
+  }
+}
