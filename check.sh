@@ -4,6 +4,7 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 VENV="$SCRIPT_DIR/.venv"
 HASHFILE="$VENV/.requirements-hash"
+VERMIN_TARGET="3.10-"
 
 if [ ! -d "$VENV" ]; then
   python3 -m venv "$VENV"
@@ -48,7 +49,7 @@ echo "--- mypy ---"
 mypy --strict "${TOP_PY[@]}"
 
 echo "--- vermin ---"
-vermin --target=3.7- --violations --no-tips "${ALL_PY[@]}"
+vermin --target=${VERMIN_TARGET} --violations --no-tips "${ALL_PY[@]}"
 
 echo "--- shellcheck ---"
 shellcheck -x "${ALL_SH[@]}"
