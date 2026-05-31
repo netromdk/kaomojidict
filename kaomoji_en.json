@@ -1,7 +1,7 @@
 {
   "locale": "en",
   "description": "Kaomoji dictionary",
-  "version": 1,
+  "version": 2,
   "kaomoji": {
     "(◕‿◕)": [
       "happy",
