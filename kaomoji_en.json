@@ -74,7 +74,9 @@
     "(╥﹏╥)": [
       "cry",
       "sad",
-      "tears"
+      "tears",
+      "sob",
+      "weeping"
     ],
     "(｡ŏ﹏ŏ)": [
       "cry",
@@ -84,22 +86,31 @@
     "(T_T)": [
       "cry",
       "sad",
-      "tears"
+      "tears",
+      "sob",
+      "weeping"
     ],
     "(ಥ﹏ಥ)": [
       "cry",
       "sad",
-      "sobbing"
+      "sobbing",
+      "sob",
+      "weeping"
     ],
     "(；д；)": [
       "cry",
       "sad",
-      "tears"
+      "tears",
+      "sob",
+      "weeping"
     ],
     "(ノ﹏ヽ)": [
       "cry",
       "sad",
-      "sorry"
+      "sorry",
+      "despair",
+      "begging",
+      "helpless"
     ],
     "(◕‿◕✿)": [
       "love",
@@ -110,12 +121,14 @@
     "(♥_♥)": [
       "love",
       "heart",
-      "adore"
+      "adore",
+      "love_struck"
     ],
     "(❤‿❤)": [
       "love",
       "heart",
-      "sweet"
+      "sweet",
+      "love_struck"
     ],
     "(ɔˆ ³(ˆ⌣ˆc)": [
       "love",
@@ -125,7 +138,9 @@
     "(づ｡◕‿‿◕｡)づ": [
       "hug",
       "love",
-      "cuddle"
+      "cuddle",
+      "embrace",
+      "snuggle"
     ],
     "♡(◕‿◕)♡": [
       "love",
@@ -137,19 +152,25 @@
       "flip",
       "rage",
       "angry",
-      "frustrated"
+      "frustrated",
+      "wild",
+      "crazy"
     ],
     "(ノಠ益ಠ)ノ": [
       "tableflip",
       "flip",
       "angry",
       "rage",
-      "frustrated"
+      "frustrated",
+      "wild",
+      "crazy"
     ],
     "(｀皿´)": [
       "angry",
       "mad",
-      "frustrated"
+      "frustrated",
+      "grumpy",
+      "irritated"
     ],
     "ಠ_ಠ": [
       "disapproval",
@@ -162,11 +183,25 @@
       "furious",
       "mad"
     ],
+    "(｀´)": [
+      "angry",
+      "annoyed",
+      "grumpy",
+      "irritated"
+    ],
+    "(｀∀´)": [
+      "evil",
+      "smug",
+      "sinister",
+      "plotting",
+      "wicked"
+    ],
     "¯\\_(ツ)_/¯": [
       "shrug",
       "shrugging",
       "whatever",
-      "sure"
+      "sure",
+      "dunno"
     ],
     "¯\\_(⊙_⊙)_/¯": [
       "shrug",
@@ -177,22 +212,26 @@
     "(⊙_⊙)": [
       "surprised",
       "shocked",
-      "confused"
+      "confused",
+      "gasp"
     ],
     "(○o○)": [
       "surprised",
       "shocked",
-      "amazed"
+      "amazed",
+      "gasp"
     ],
     "(ﾟoﾟ)": [
       "surprised",
       "shocked",
-      "astonished"
+      "astonished",
+      "gasp"
     ],
     "(□_□)": [
       "surprised",
       "shocked",
-      "speechless"
+      "speechless",
+      "gasp"
     ],
     "(@_@)": [
       "dazed",
@@ -209,28 +248,59 @@
       "motivated",
       "determined",
       "yes",
-      "cool"
+      "cool",
+      "pumped",
+      "spirit"
     ],
     "ᕙ(▀̿̿Ĺ̯̿̿▀̿ ̿)ᕗ": [
       "tough",
       "cool",
       "determined",
-      "badass"
+      "badass",
+      "pumped",
+      "spirit",
+      "victory"
     ],
     "(•̀ω•́)✧": [
       "determined",
       "motivated",
-      "fire"
+      "fire",
+      "pumped",
+      "spirit"
+    ],
+    "(｀・ω・´)": [
+      "determined",
+      "confident",
+      "smug",
+      "poised",
+      "serious"
+    ],
+    "p(^^)q": [
+      "fight",
+      "spirit",
+      "motivated",
+      "pumped",
+      "determined"
+    ],
+    "(*^^)v": [
+      "victory",
+      "win",
+      "peace",
+      "success",
+      "v_sign"
     ],
     "ヽ(￣д￣;)ノ": [
       "panic",
       "worried",
-      "oh no"
+      "oh no",
+      "helpless",
+      "no_good"
     ],
     "(；一_一)": [
       "sigh",
       "tired",
-      "exhausted"
+      "exhausted",
+      "resigned"
     ],
     "(－‸ლ)": [
       "facepalm",
@@ -240,7 +310,8 @@
     "(╯˘～˘)╯": [
       "sleepy",
       "tired",
-      "goodnight"
+      "goodnight",
+      "drowsy"
     ],
     "ʕ·ᴥ·ʔ": [
       "bear",
@@ -276,7 +347,10 @@
     "ᕦ(ò_óˇ)ᕤ": [
       "strong",
       "determined",
-      "fight"
+      "fight",
+      "pumped",
+      "spirit",
+      "victory"
     ],
     "(╯°□°)╯︵ʞɔɐᴉן∩": [
       "tableflip",
@@ -304,7 +378,8 @@
     "(｡♥‿♥｡)": [
       "love",
       "adorable",
-      "sweet"
+      "sweet",
+      "love_struck"
     ],
     "(◡‿◡)": [
       "shy",
@@ -329,23 +404,28 @@
     "(¬_¬)": [
       "skeptical",
       "judging",
-      "sideeye"
+      "sideeye",
+      "plotting"
     ],
     "(￣▽￣)": [
       "smug",
       "confident",
-      "smirk"
+      "smirk",
+      "cheeky"
     ],
     "(◔_◔)": [
       "sideeye",
       "skeptical",
-      "unsure"
+      "unsure",
+      "lurking",
+      "spying"
     ],
     "(─.─||)": [
       "speechless",
       "disappointed",
       "facepalm",
-      "sigh"
+      "sigh",
+      "resigned"
     ],
     "＼(〇_ｏ)／": [
       "surprise",
@@ -372,7 +452,8 @@
     "(︶︹︺)": [
       "bored",
       "tired",
-      "unimpressed"
+      "unimpressed",
+      "resigned"
     ],
     "(￣ω￣)": [
       "smirk",
@@ -382,18 +463,24 @@
     "(◑‿◐)": [
       "wink",
       "playful",
-      "mischievous"
+      "mischievous",
+      "cheeky",
+      "teehee"
     ],
     "(づ￣ ³￣)づ": [
       "hug",
       "kiss",
       "love",
-      "cuddle"
+      "cuddle",
+      "embrace",
+      "snuggle"
     ],
     "(っ˘̩╭╮˘̩)っ": [
       "hug",
       "comfort",
-      "support"
+      "support",
+      "embrace",
+      "snuggle"
     ],
     "♡〜٩(^▿^)۶〜♡": [
       "love",
@@ -425,6 +512,59 @@
       "happy",
       "dance"
     ],
+    "＼(^o^)／": [
+      "banzai",
+      "excited",
+      "cheer",
+      "celebrate",
+      "arms_up"
+    ],
+    "\\(^o^)/": [
+      "banzai",
+      "cheer",
+      "celebrate",
+      "arms_up"
+    ],
+    "＼(＾▽＾)／": [
+      "joy",
+      "celebrate",
+      "arms_up",
+      "banzai"
+    ],
+    "ヾ(＾∇＾)ﾉ": [
+      "cheer",
+      "celebrate",
+      "wave",
+      "happy"
+    ],
+    "ヽ(●´∀｀●)ﾉ": [
+      "happy",
+      "arms_up",
+      "joy",
+      "excited"
+    ],
+    "ヽ(>∀<☆)ノ": [
+      "super_happy",
+      "excited",
+      "sparkle"
+    ],
+    "\\(★ω★)/": [
+      "excited",
+      "starstruck",
+      "awesome"
+    ],
+    "╰( ⁰ ਊ ⁰ )╯": [
+      "celebrate",
+      "happy",
+      "excited",
+      "dance"
+    ],
+    "~(˘▾˘)~": [
+      "wave",
+      "dance",
+      "carefree",
+      "happy"
+    ],
     "(；￣Д￣)": [
       "sweat",
       "nervous",
@@ -434,7 +574,17 @@
     "(；´Д｀)": [
       "tired",
       "exhausted",
-      "struggling"
+      "struggling",
+      "despair",
+      "helpless",
+      "no_good"
+    ],
+    "(´-ω-`)": [
+      "tired",
+      "sleepy",
+      "drowsy",
+      "resigned",
+      "bleary"
     ],
     "(/ω＼)": [
       "embarrassed",
@@ -449,7 +599,9 @@
     "|･ω･)": [
       "peek",
       "hiding",
-      "shy"
+      "shy",
+      "lurking",
+      "spying"
     ],
     "ヾ(･ω･*)": [
       "bye",
@@ -461,11 +613,28 @@
       "hello",
       "bye"
     ],
+    "ヽ(^o^)丿": [
+      "joy",
+      "cheer",
+      "wave",
+      "hello",
+      "arms_up"
+    ],
+    "(ﾉ´ｰ`)ﾉ": [
+      "wave",
+      "carefree",
+      "laissez_faire",
+      "bye"
+    ],
     "(-_-)ゞ": [
       "apologetic",
       "sorry",
       "embarrassed",
-      "sheepish"
+      "sheepish",
+      "cheeky",
+      "teehee",
+      "bow",
+      "apologize"
     ],
     "(◔‿◔)": [
       "interested",
@@ -486,7 +655,9 @@
     "(✧ω✧)": [
       "sparkle",
       "excited",
-      "amazed"
+      "amazed",
+      "starstruck",
+      "awesome"
     ],
     "＜（＾－＾）＞": [
       "smile",
@@ -498,6 +669,63 @@
       "adorable",
       "sweet"
     ],
+    "(≧▽≦)": [
+      "excited",
+      "happy",
+      "overjoyed",
+      "thrilled",
+      "squee"
+    ],
+    "(*´▽`*)": [
+      "happy",
+      "blush",
+      "delighted",
+      "lovestruck",
+      "euphoric"
+    ],
+    "(˶ᵔ ᵕ ᵔ˶)": [
+      "cute",
+      "happy",
+      "soft_smile",
+      "content"
+    ],
+    "o(≧▽≦)o": [
+      "super_happy",
+      "squeal",
+      "excited",
+      "joy"
+    ],
+    "(⊃｡•́‿•̀｡)⊃": [
+      "embrace",
+      "hug",
+      "comfort",
+      "snuggle"
+    ],
+    "⊂(◉‿◉)つ": [
+      "grab",
+      "hug",
+      "embrace",
+      "gimme"
+    ],
+    "(´｡• ᵕ •｡`)×": [
+      "cute_blush",
+      "adoring",
+      "love_struck"
+    ],
+    "orz": [
+      "despair",
+      "defeat",
+      "sorry",
+      "begging",
+      "face_down"
+    ],
+    "m(_ _)m": [
+      "bow",
+      "apologize",
+      "respect",
+      "sorry",
+      "humble"
+    ],
     "♡( ◡‿◡ )": [
       "love",
       "cute",
@@ -508,31 +736,83 @@
       "surprised",
       "shocked",
       "confused",
+      "dazed",
+      "gasp"
+    ],
+    "∑(ﾟДﾟ)": [
+      "shocked",
+      "surprised",
+      "stunned",
+      "gasp",
+      "what"
+    ],
+    "(　ﾟДﾟ)": [
+      "shocked",
+      "speechless",
+      "stunned"
+    ],
+    "(´⊙ω⊙`)": [
+      "shocked",
+      "confused",
+      "ow",
       "dazed"
+    ],
+    "┐(￣ヘ￣)┌": [
+      "dunno",
+      "whatever",
+      "clueless",
+      "helpless"
+    ],
+    "(ﾟ∀ﾟ)": [
+      "crazy",
+      "amazed",
+      "wild",
+      "excited",
+      "manic"
     ],
     "(＞﹏＜)": [
       "struggling",
       "cute",
       "pleading",
-      "sorry"
+      "sorry",
+      "begging",
+      "helpless"
+    ],
+    "(´；ω；`)": [
+      "cry",
+      "sob",
+      "pitiful",
+      "tragic",
+      "weeping"
+    ],
+    "(;´Д`)": [
+      "struggling",
+      "despair",
+      "exhausted",
+      "no_good"
     ],
     "_(:3」∠)_": [
       "lazy",
       "tired",
       "dead",
-      "sleepy"
+      "sleepy",
+      "despair",
+      "drowsy"
     ],
     "(◞‸◟)": [
       "sad",
       "lonely",
       "depressed",
-      "cry"
+      "cry",
+      "despair"
     ],
     "(；▽；)": [
       "cry",
       "tears",
       "moved",
-      "emotional"
+      "emotional",
+      "sob",
+      "weeping"
     ],
     "(๑•́ㅿ•̀๑)": [
       "shy",
@@ -545,6 +825,25 @@
       "shy",
       "cute",
       "flustered"
+    ],
+    "(^^ゞ": [
+      "shy",
+      "scratching_head",
+      "embarrassed",
+      "sheepish"
+    ],
+    "(´∇ﾉ｀*)ノ": [
+      "teehee",
+      "playful",
+      "shy",
+      "cheeky",
+      "hide"
+    ],
+    "(　･ω･)": [
+      "peeking",
+      "shy",
+      "lurking",
+      "spying"
     ]
   }
 }
