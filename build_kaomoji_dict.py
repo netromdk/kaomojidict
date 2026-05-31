@@ -51,11 +51,66 @@ def build_combined(
     f"dictionary=emoji:{locale},locale={locale},"
     f"description={description},date={date},version={version}",
   ]
+  lines += _build_kaomoji_lines(kaomoji_map)
+  return "\n".join(lines)
+
+
+def merge_with_combined(
+  kaomoji_map: dict[str, list[str]],
+  combined_path: str,
+  description: str = "Kaomoji dictionary",
+  date: int | None = None,
+) -> str:
+  """Merge kaomoji entries into an existing .combined wordlist file."""
+  if date is None:
+    date = int(time.time())
+
+  combined_path = Path(combined_path)
+  if not combined_path.is_file():
+    raise FileNotFoundError(f"Combined file not found: {combined_path}")
+
+  with open(combined_path, encoding="utf-8") as f:
+    content = f.read()
+
+  lines = content.rstrip("\n").split("\n")
+  if not lines or not lines[0].strip():
+    raise ValueError("Empty combined file")
+
+  header = lines[0]
+  header = _patch_header(header, description=description, date=date)
+
+  kaomoji_lines = _build_kaomoji_lines(kaomoji_map)
+  existing = lines[1:] if len(lines) > 1 else []
+  return "\n".join([header] + existing + kaomoji_lines)
+
+
+def _patch_header(header: str, description: str, date: int) -> str:
+  parts = header.split(",")
+  bumped = False
+  new_parts = []
+  for part in parts:
+    if part.startswith("description="):
+      new_parts.append(f"description={description}")
+    elif part.startswith("date="):
+      new_parts.append(f"date={date}")
+    elif part.startswith("version=") and not bumped:
+      bumped = True
+      ver = int(part.split("=", 1)[1]) + 1
+      new_parts.append(f"version={ver}")
+    else:
+      new_parts.append(part)
+  if not bumped:
+    new_parts.append("version=1")
+  return ",".join(new_parts)
+
+
+def _build_kaomoji_lines(kaomoji_map: dict[str, list[str]]) -> list[str]:
+  lines: list[str] = []
   for kaomoji, words in kaomoji_map.items():
     for word in words:
       lines.append(f" word={word},f={KAOMOJI_FLAGS},not_a_word=true")
       lines.append(f"  shortcut={kaomoji},f={KAOMOJI_FLAGS}")
-  return "\n".join(lines)
+  return lines
 
 
 def compile_dict(combined_content: str, output_path: str, jar_path: str) -> None:
@@ -86,6 +141,10 @@ def main() -> None:
     "--jar",
     default=str(SCRIPT_DIR / "aosp-dictionary-tools" / "dicttool_aosp.jar"),
     help="Path to dicttool_aosp.jar (default: %(default)s)",
+  )
+  parser.add_argument(
+    "-m", "--merge-combined", default=None,
+    help="Path to existing .combined wordlist to merge kaomoji into (preserves original locale & entries)",
   )
   parser.add_argument(
     "--keep-combined", action="store_true",
@@ -137,6 +196,7 @@ def main() -> None:
     print("error: input JSON must contain a 'kaomoji' object", file=sys.stderr)
     sys.exit(1)
   locale = args.locale if args.locale is not None else (data.get("locale") or "en")
+  output_given = args.output is not None
   if args.output is None:
     args.output = f"kaomoji_{locale}.dict"
   description = data.get("description", args.description)
@@ -145,7 +205,16 @@ def main() -> None:
     version = 1
   build_version = version + 1 if not args.no_bump else version
 
-  combined = build_combined(kaomoji_map, locale, description, build_version)
+  if args.merge_combined:
+    combined_path = Path(args.merge_combined)
+    if not combined_path.is_file():
+      print(f"error: combined file not found: {args.merge_combined}", file=sys.stderr)
+      sys.exit(1)
+    if not output_given:
+      args.output = str(combined_path.with_suffix(".dict"))
+    combined = merge_with_combined(kaomoji_map, str(combined_path), description)
+  else:
+    combined = build_combined(kaomoji_map, locale, description, build_version)
 
   if args.keep_combined:
     combined_path = str(Path(args.output).with_suffix(".combined"))
