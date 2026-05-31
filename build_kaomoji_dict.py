@@ -118,6 +118,14 @@ def main() -> None:
     print("error: 'java' is required but not found on PATH", file=sys.stderr)
     sys.exit(1)
 
+  jar_path = Path(args.jar)
+  if not jar_path.is_file():
+    msg = f"jar not found: {args.jar}"
+    if args.jar == str(SCRIPT_DIR / "aosp-dictionary-tools" / "dicttool_aosp.jar"):
+      msg += "\nRun: git submodule update --init --recursive"
+    print(f"error: {msg}", file=sys.stderr)
+    sys.exit(1)
+
   if not args.input:
     args.input = str(SCRIPT_DIR / DEFAULT_INPUT)
     print(f"Using default kaomoji set ({args.input})", file=sys.stderr)
