@@ -11,30 +11,49 @@ Requires `java` on PATH.
 
 ## Format
 
-Each JSON file contains a locale, description, version, and map of kaomoji to search tags:
+A single `kaomoji.json` contains all locales with per-locale tags and descriptions:
 
 ```json
 {
-  "locale": "en",
-  "description": "Kaomoji dictionary",
+  "locales": ["en", "da"],
+  "description": {
+    "en": "English Kaomoji dictionary",
+    "da": "Dansk kaomoji-ordbog"
+  },
   "version": 1,
   "kaomoji": {
-    "(◕‿◕)": ["happy", "cute"],
-    "(╯°□°)╯︵┻━┻": ["tableflip", "rage"]
+    "(◕‿◕)": {
+      "en": ["happy", "cute"],
+      "da": ["glad", "sød"]
+    },
+    "(╯°□°)╯︵┻━┻": {
+      "en": ["tableflip", "rage"],
+      "da": ["bordvæltning", "raseri"]
+    }
   }
 }
 ```
 
-Build with `build_kaomoji_dict.py`:
+Build one locale at a time:
 
 ```sh
-python build_kaomoji_dict.py kaomoji_en.json
+python build_kaomoji_dict.py kaomoji.json --locale en
+python build_kaomoji_dict.py --locale da
+```
+
+Note: It defaults to using `kaomoji.json` if none is given.
+
+Or use `--all-locales` to merge all locales' tags into a single dictionary with
+more trigger words for each Kaomoji:
+
+```sh
+python build_kaomoji_dict.py --locale en --all-locales
 ```
 
 ## Merge with upstream emoji dictionaries
 
 To get Kaomoji suggestions alongside the official upstream emoji entries,
-download the `.combined` wordlists and use `--merge-combined`:
+download the `.combined` wordlists for each locale:
 
 ```sh
 wget https://codeberg.org/Helium314/aosp-dictionaries/raw/branch/main/emoji_cldr_signal_wordlists/emoji_en.combined
@@ -42,10 +61,31 @@ wget https://codeberg.org/Helium314/aosp-dictionaries/raw/branch/main/emoji_cldr
 ./build_all.sh
 ```
 
+`build_all.sh` produces **two** `.dict` files per locale:
+
+| File | Tags used |
+|------|-----------|
+| `kaomoji_en.dict` | locale-specific (`en`) |
+| `kaomoji_en_combined.dict` | all locales merged (`en` + `da` + ...) |
+
+The `_combined` variant has more trigger words per kaomoji at the cost of
+mixing languages, so a Danish tag can trigger an English Kaomoji suggestion.
+
 Kaomoji entries are appended to the upstream wordlist, producing a single
 `.dict` per locale with both emoji and Kaomoji. Note that Kaomoji appear as
 text suggestions, not rendered emoji. They consist of multiple Unicode code
 points (e.g., `(╯°□°)╯︵┻━┻`), so HeliBoard displays them inline as text.
+
+The merged description follows the format:
+`<kaomoji_desc> [(all locales)] (<original_emoji_desc>)`.
+
+You can also run the merge step on a single locale by passing `--merge-combined`
+/ `-m` directly to `build_kaomoji_dict.py`:
+
+```sh
+python build_kaomoji_dict.py --locale en --merge-combined emoji_en.combined -o kaomoji_en.dict
+python build_kaomoji_dict.py --locale en --all-locales --merge-combined emoji_en.combined -o kaomoji_en_combined.dict
+```
 
 ## Tests
 
