@@ -109,9 +109,10 @@ def test_main_keep_combined(tmp_path, capsys):
 
 
 def test_main_no_bump_keeps_file_unchanged(tmp_path):
+  initial_version = 7
   input_file = tmp_path / "test.json"
   input_file.write_text(json.dumps({
-    "version": 7,
+    "version": initial_version,
     "kaomoji": {"foo": ["bar"]},
   }), encoding="utf-8")
 
@@ -127,7 +128,7 @@ def test_main_no_bump_keeps_file_unchanged(tmp_path):
     bkd.main()
 
   updated = json.loads(input_file.read_text(encoding="utf-8"))
-  assert updated["version"] == 7
+  assert updated["version"] == initial_version
 
 
 def test_main_no_bump_uses_original_version_in_build(tmp_path, capsys):

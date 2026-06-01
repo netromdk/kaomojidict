@@ -113,4 +113,4 @@ def test_main_version_defaults_to_one_when_bumped(tmp_path, input_overrides):
     bkd.main()
 
   updated = json.loads(input_file.read_text(encoding="utf-8"))
-  assert updated["version"] == default_version + 1
+  assert updated["version"] == 2
