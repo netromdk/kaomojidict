@@ -10,6 +10,16 @@ git submodule update --init --recursive
 ./build_all.sh
 ```
 
+`build_all.sh` produces **two** `.dict` files per locale:
+
+| File | Tags used |
+|------|-----------|
+| `kaomoji_en.dict` | locale-specific (`en`) |
+| `kaomoji_en_all_locales.dict` | all locales merged (`en` + `da` + ...) |
+
+The `_all_locales` variant has more trigger words per Kaomoji at the cost of
+mixing languages, so a Danish tag can trigger an English Kaomoji suggestion.
+
 Requires `java` on PATH.
 
 ## Format
@@ -68,18 +78,16 @@ download the `.combined` wordlists for each locale:
 ```sh
 wget https://codeberg.org/Helium314/aosp-dictionaries/raw/branch/main/emoji_cldr_signal_wordlists/emoji_en.combined
 wget https://codeberg.org/Helium314/aosp-dictionaries/raw/branch/main/emoji_cldr_signal_wordlists/emoji_da.combined
-./build_all.sh
 ```
 
-`build_all.sh` produces **two** `.dict` files per locale:
+Then run the merge step manually using `--merge-combined` / `-m`:
 
-| File | Tags used |
-|------|-----------|
-| `kaomoji_en.dict` | locale-specific (`en`) |
-| `kaomoji_en_combined.dict` | all locales merged (`en` + `da` + ...) |
-
-The `_combined` variant has more trigger words per Kaomoji at the cost of
-mixing languages, so a Danish tag can trigger an English Kaomoji suggestion.
+```sh
+./build_kaomoji_dict.py --locale en --merge-combined emoji_en.combined \
+                        --output kaomoji_en.dict
+./build_kaomoji_dict.py --locale en --all-locales --merge-combined emoji_en.combined \
+                        --output kaomoji_en_combined.dict
+```
 
 Kaomoji entries are appended to the upstream wordlist, producing a single
 `.dict` per locale with both emoji and Kaomoji. Both standalone and merged
@@ -91,15 +99,9 @@ HeliBoard displays them inline as text.
 The merged description follows the format:
 `<kaomoji_desc> [<all locales>] (<orig_desc> v<orig_version>)`.
 
-You can also run the merge step on a single locale by passing `--merge-combined`
-/ `-m` directly to `build_kaomoji_dict.py`:
-
-```sh
-./build_kaomoji_dict.py --locale en --merge-combined emoji_en.combined \
-                        --output kaomoji_en.dict
-./build_kaomoji_dict.py --locale en --all-locales --merge-combined emoji_en.combined \
-                        --output kaomoji_en_combined.dict
-```
+Note: `build_all.sh` produces standalone dicts only (`kaomoji_en.dict` and
+`kaomoji_en_all_locales.dict`). It does not merge with upstream combined
+files. Use the commands above for that.
 
 ## Tests
 

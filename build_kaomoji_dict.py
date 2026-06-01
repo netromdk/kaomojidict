@@ -248,7 +248,11 @@ def main() -> None:
     data.get("locale") or data.get("locales", ["en"])[0]
   )
   if args.output is None:
-    suffix = "_combined" if args.all_locales else ""
+    suffix = ""
+    if args.all_locales:
+      suffix = "_all_locales"
+    if args.merge_combined:
+      suffix += "_combined"
     args.output = f"kaomoji_{locale}{suffix}.dict"
   version = data.get("version", args.version)
   if not isinstance(version, int) or version < 1:

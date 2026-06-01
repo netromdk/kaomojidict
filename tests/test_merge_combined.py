@@ -143,7 +143,7 @@ def test_main_merge_combined(tmp_path):
     bkd.main()
 
   call_args = mock_run.call_args[0][0]
-  assert call_args[7] == "kaomoji_en.dict"
+  assert call_args[7] == "kaomoji_en_combined.dict"
 
 
 def test_main_merge_combined_explicit_output(tmp_path):
@@ -196,9 +196,9 @@ def test_main_merge_combined_keep_combined(tmp_path, capsys):
     bkd.main()
 
   out = capsys.readouterr().out
-  assert "Wordlist written to: kaomoji_en.combined" in out
+  assert "Wordlist written to: kaomoji_en_combined.combined" in out
 
-  kept = Path("kaomoji_en.combined")
+  kept = Path("kaomoji_en_combined.combined")
   assert kept.exists()
   content = kept.read_text(encoding="utf-8")
   assert "happy" in content
@@ -270,7 +270,7 @@ def test_main_all_locales(tmp_path):
     bkd.main()
 
   call_args = mock_run.call_args[0][0]
-  assert call_args[7] == "kaomoji_en_combined.dict"
+  assert call_args[7] == "kaomoji_en_all_locales_combined.dict"
 
 
 def test_main_all_locales_combined_desc(tmp_path, capsys):
