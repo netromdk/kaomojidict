@@ -36,7 +36,7 @@ def test_main_with_input_file(tmp_path, capsys):
 
 
 def test_main_without_input(tmp_path, capsys):
-  fake_default = tmp_path / "kaomoji_en.json"
+  fake_default = tmp_path / "kaomoji.json"
   fake_default.write_text(json.dumps({
     "kaomoji": {"¯\\_(ツ)_/¯": ["shrug"], "(╯°□°)╯︵┻━┻": ["tableflip"]},
   }), encoding="utf-8")
@@ -61,7 +61,7 @@ def test_main_without_input(tmp_path, capsys):
 
 
 def test_main_without_input_non_en_locale_uses_default_json(tmp_path, capsys):
-  fake_default = tmp_path / "kaomoji_en.json"
+  fake_default = tmp_path / "kaomoji.json"
   fake_default.write_text(json.dumps({
     "kaomoji": {"¯\\_(ツ)_/¯": ["shrug"]},
   }), encoding="utf-8")

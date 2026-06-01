@@ -29,7 +29,7 @@ import time
 from pathlib import Path
 
 SCRIPT_DIR = Path(__file__).resolve().parent
-DEFAULT_INPUT = "kaomoji_en.json"
+DEFAULT_INPUT = "kaomoji.json"
 
 # Flag bits for the AOSP dictionary combined format:
 NOT_A_WORD = 2  # Entry is a shortcut, not a real word.
@@ -57,7 +57,7 @@ def build_combined(
 
 def merge_with_combined(
   kaomoji_map: dict[str, list[str]],
-  combined_path: str,
+  combined_path: str | Path,
   description: str = "Kaomoji dictionary",
   date: int | None = None,
 ) -> str:
@@ -65,11 +65,11 @@ def merge_with_combined(
   if date is None:
     date = int(time.time())
 
-  combined_path = Path(combined_path)
-  if not combined_path.is_file():
+  combined = Path(combined_path)
+  if not combined.is_file():
     raise FileNotFoundError(f"Combined file not found: {combined_path}")
 
-  with open(combined_path, encoding="utf-8") as f:
+  with open(combined, encoding="utf-8") as f:
     content = f.read()
 
   lines = content.rstrip("\n").split("\n")
@@ -77,7 +77,13 @@ def merge_with_combined(
     raise ValueError("Empty combined file")
 
   header = lines[0]
-  header = _patch_header(header, description=description, date=date)
+  orig_desc = ""
+  for part in header.split(","):
+    if part.startswith("description="):
+      orig_desc = part.split("=", 1)[1]
+      break
+  full_desc = f"{description} ({orig_desc})" if orig_desc else description
+  header = _patch_header(header, description=full_desc, date=date)
 
   kaomoji_lines = _build_kaomoji_lines(kaomoji_map)
   existing = lines[1:] if len(lines) > 1 else []
@@ -113,6 +119,29 @@ def _build_kaomoji_lines(kaomoji_map: dict[str, list[str]]) -> list[str]:
   return lines
 
 
+def _extract_tags(
+  kaomoji_map: dict[str, list[str] | dict[str, list[str]]],
+  locale: str | None = None,
+  all_locales: bool = False,
+) -> dict[str, list[str]]:
+  """Flatten per-locale tags or pass through flat lists."""
+  result: dict[str, list[str]] = {}
+  for kaomoji, tags in kaomoji_map.items():
+    if isinstance(tags, dict):
+      if all_locales:
+        merged: list[str] = []
+        for loc_tags in tags.values():
+          merged.extend(loc_tags)
+        result[kaomoji] = merged
+      elif locale is not None and locale in tags:
+        result[kaomoji] = tags[locale]
+      else:
+        result[kaomoji] = []
+    else:
+      result[kaomoji] = tags
+  return result
+
+
 def compile_dict(combined_content: str, output_path: str, jar_path: str) -> None:
   if not Path(jar_path).is_file():
     raise RuntimeError(f"jar not found: {jar_path}")
@@ -144,7 +173,7 @@ def main() -> None:
   )
   parser.add_argument(
     "-m", "--merge-combined", default=None,
-    help="Path to existing .combined wordlist to merge kaomoji into (preserves original locale & entries)",
+    help="Path to .combined wordlist to merge kaomoji into (preserves locale & entries)",
   )
   parser.add_argument(
     "--keep-combined", action="store_true",
@@ -165,6 +194,10 @@ def main() -> None:
   parser.add_argument(
     "--no-bump", action="store_true",
     help="Do not bump the version in the input JSON file",
+  )
+  parser.add_argument(
+    "--all-locales", action="store_true",
+    help="Include tags from all locales (not just the selected one)",
   )
   parser.add_argument(
     "-v", "--verbose", action="store_true",
@@ -195,32 +228,44 @@ def main() -> None:
   if not isinstance(kaomoji_map, dict):
     print("error: input JSON must contain a 'kaomoji' object", file=sys.stderr)
     sys.exit(1)
-  locale = args.locale if args.locale is not None else (data.get("locale") or "en")
-  output_given = args.output is not None
+  locale = args.locale if args.locale is not None else (
+    data.get("locale") or data.get("locales", ["en"])[0]
+  )
   if args.output is None:
-    args.output = f"kaomoji_{locale}.dict"
-  description = data.get("description", args.description)
+    suffix = "_combined" if args.all_locales else ""
+    args.output = f"kaomoji_{locale}{suffix}.dict"
   version = data.get("version", args.version)
   if not isinstance(version, int) or version < 1:
     version = 1
   build_version = version + 1 if not args.no_bump else version
+
+  desc_raw = data.get("description", args.description)
+  description: str
+  if isinstance(desc_raw, dict):
+    fallback = desc_raw.get(data.get("locales", [None])[0], args.description)
+    description = desc_raw.get(locale, fallback)
+  else:
+    description = desc_raw
+
+  if args.all_locales:
+    description = f"{description} (all locales)"
+
+  kaomoji_flat = _extract_tags(kaomoji_map, locale, args.all_locales)
 
   if args.merge_combined:
     combined_path = Path(args.merge_combined)
     if not combined_path.is_file():
       print(f"error: combined file not found: {args.merge_combined}", file=sys.stderr)
       sys.exit(1)
-    if not output_given:
-      args.output = str(combined_path.with_suffix(".dict"))
-    combined = merge_with_combined(kaomoji_map, str(combined_path), description)
+    combined = merge_with_combined(kaomoji_flat, str(combined_path), description)
   else:
-    combined = build_combined(kaomoji_map, locale, description, build_version)
+    combined = build_combined(kaomoji_flat, locale, description, build_version)
 
   if args.keep_combined:
-    combined_path = str(Path(args.output).with_suffix(".combined"))
-    with open(combined_path, "w", encoding="utf-8") as f:
+    combined_out = Path(args.output).with_suffix(".combined")
+    with open(combined_out, "w", encoding="utf-8") as f:
       f.write(combined)
-    print(f"Wordlist written to: {combined_path}")
+    print(f"Wordlist written to: {combined_out}")
 
   if args.verbose:
     print(f"\nCombined wordlist ({len(kaomoji_map)} kaomoji):\n{combined}\n")

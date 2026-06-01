@@ -1,4 +1,5 @@
 import json
+from pathlib import Path
 from unittest.mock import MagicMock, patch
 
 import pytest
@@ -26,7 +27,7 @@ def test_merge_with_combined_basic(tmp_path):
   assert len(lines) == 5
   assert lines[0] == (
     "dictionary=emoji:en,locale=en,"
-    f"description=Kaomoji dictionary,date={FREEZE_TS},version=4"
+    f"description=Kaomoji dictionary (Emoji dictionary),date={FREEZE_TS},version=4"
   )
   assert lines[1] == " word=smile,f=200"
   assert lines[2] == " word=heart,f=150"
@@ -45,7 +46,7 @@ def test_merge_with_combined_preserves_header_type_and_locale(tmp_path):
   with patch("time.time", return_value=FREEZE_TS):
     result = bkd.merge_with_combined(kaomoji, str(src), "Kaomoji")
 
-  header = result.split("\n")[0]
+  header = result.split("\n", maxsplit=1)[0]
   assert "dictionary=emoji:da" in header
   assert "locale=da" in header
 
@@ -61,9 +62,8 @@ def test_merge_with_combined_updates_description(tmp_path):
   with patch("time.time", return_value=FREEZE_TS):
     result = bkd.merge_with_combined(kaomoji, str(src), "Updated description")
 
-  header = result.split("\n")[0]
-  assert "description=Updated description" in header
-  assert "Old desc" not in header
+  header = result.split("\n", maxsplit=1)[0]
+  assert "description=Updated description (Old desc)" in header
 
 
 def test_merge_with_combined_file_not_found():
@@ -119,7 +119,7 @@ def test_merge_with_combined_multiple_kaomoji(tmp_path):
   assert lines[7] == f"  shortcut=b,f={bkd.KAOMOJI_FLAGS}"
 
 
-def test_main_merge_combined(tmp_path, capsys):
+def test_main_merge_combined(tmp_path):
   combined_file = tmp_path / "emoji_en.combined"
   combined_file.write_text(EN_COMBINED, encoding="utf-8")
 
@@ -141,10 +141,10 @@ def test_main_merge_combined(tmp_path, capsys):
     bkd.main()
 
   call_args = mock_run.call_args[0][0]
-  assert call_args[7] == str(tmp_path / "emoji_en.dict")
+  assert call_args[7] == "kaomoji_en.dict"
 
 
-def test_main_merge_combined_explicit_output(tmp_path, capsys):
+def test_main_merge_combined_explicit_output(tmp_path):
   combined_file = tmp_path / "emoji_en.combined"
   combined_file.write_text(EN_COMBINED, encoding="utf-8")
 
@@ -193,15 +193,16 @@ def test_main_merge_combined_keep_combined(tmp_path, capsys):
       patch("time.time", return_value=FREEZE_TS):
     bkd.main()
 
-  kept_combined = tmp_path / "emoji_en.combined"
-  assert kept_combined.exists()
-  content = kept_combined.read_text(encoding="utf-8")
+  out = capsys.readouterr().out
+  assert "Wordlist written to: kaomoji_en.combined" in out
+
+  kept = Path("kaomoji_en.combined")
+  assert kept.exists()
+  content = kept.read_text(encoding="utf-8")
   assert "happy" in content
   assert "smile" in content
   assert "heart" in content
-
-  out = capsys.readouterr().out
-  assert "Wordlist written to" in out
+  kept.unlink()
 
 
 def test_main_merge_combined_missing_file(tmp_path):
@@ -222,3 +223,100 @@ def test_main_merge_combined_missing_file(tmp_path):
     with pytest.raises(SystemExit) as exc:
       bkd.main()
     assert exc.value.code == 1
+
+
+# pylint: disable=protected-access
+
+def test_extract_tags_flat_passthrough():
+  kaomoji = {"(╯°□°)╯︵┻━┻": ["tableflip", "rage"]}
+  result = bkd._extract_tags(kaomoji, locale="en")
+  assert result == kaomoji
+
+
+def test_extract_tags_single_locale():
+  kaomoji = {
+    "(◕‿◕)": {"en": ["happy", "cute"], "da": ["glad", "sød"]},
+  }
+  result = bkd._extract_tags(kaomoji, locale="da")
+  assert result["(◕‿◕)"] == ["glad", "sød"]
+
+
+def test_extract_tags_all_locales():
+  kaomoji = {
+    "(╯°□°)╯︵┻━┻": {"en": ["tableflip", "rage"], "da": ["bordvæltning", "raseri"]},
+  }
+  result = bkd._extract_tags(kaomoji, locale="en", all_locales=True)
+  assert sorted(result["(╯°□°)╯︵┻━┻"]) == sorted(["tableflip", "rage", "bordvæltning", "raseri"])
+
+
+def test_extract_tags_missing_locale():
+  kaomoji = {
+    "(◕‿◕)": {"en": ["happy"]},
+  }
+  result = bkd._extract_tags(kaomoji, locale="da")
+  assert result["(◕‿◕)"] == []
+
+
+def test_main_all_locales(tmp_path):
+  combined_file = tmp_path / "emoji_en.combined"
+  combined_file.write_text(EN_COMBINED, encoding="utf-8")
+
+  input_file = tmp_path / "kaomoji.json"
+  input_file.write_text(json.dumps({
+    "locales": ["en", "da"],
+    "kaomoji": {
+      "(◕‿◕)": {"en": ["happy"], "da": ["glad"]},
+    },
+  }), encoding="utf-8")
+
+  mock_run = MagicMock(return_value=_cp())
+  with patch("sys.argv", [
+      "build_kaomoji_dict.py", str(input_file),
+      "--locale", "en", "--all-locales",
+      "-m", str(combined_file),
+      "--jar", str(tmp_path / "dummy.jar"),
+    ]), \
+      patch("shutil.which", return_value="/usr/bin/java"), \
+      patch("pathlib.Path.is_file", return_value=True), \
+      patch("subprocess.run", mock_run), \
+      patch("time.time", return_value=FREEZE_TS):
+    bkd.main()
+
+  call_args = mock_run.call_args[0][0]
+  assert call_args[7] == "kaomoji_en_combined.dict"
+
+
+def test_main_all_locales_combined_desc(tmp_path, capsys):
+  combined_file = tmp_path / "emoji_da.combined"
+  combined_file.write_text(
+    "dictionary=emoji:da,locale=da,description=Dansk emoji,date=1,version=1\n"
+    " word=hej,f=100\n",
+    encoding="utf-8",
+  )
+
+  input_file = tmp_path / "kaomoji.json"
+  input_file.write_text(json.dumps({
+    "locales": ["en", "da"],
+    "description": {"en": "Eng dict", "da": "Da ordbog"},
+    "kaomoji": {
+      "(◕‿◕)": {"en": ["happy"], "da": ["glad"]},
+    },
+  }), encoding="utf-8")
+
+  mock_run = MagicMock(return_value=_cp())
+  with patch("sys.argv", [
+      "build_kaomoji_dict.py", str(input_file),
+      "--locale", "da", "--all-locales",
+      "-m", str(combined_file),
+      "-o", str(tmp_path / "test.dict"),
+      "--jar", str(tmp_path / "dummy.jar"),
+      "--verbose",
+    ]), \
+      patch("shutil.which", return_value="/usr/bin/java"), \
+      patch("pathlib.Path.is_file", return_value=True), \
+      patch("subprocess.run", mock_run), \
+      patch("time.time", return_value=FREEZE_TS):
+    bkd.main()
+
+  out = capsys.readouterr().out
+  assert "Da ordbog (all locales) (Dansk emoji)" in out
