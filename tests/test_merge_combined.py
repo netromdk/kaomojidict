@@ -66,17 +66,19 @@ def test_merge_with_combined_updates_description(tmp_path):
   assert "description=Updated description (Old desc v1)" in header
 
 
-def test_merge_with_combined_file_not_found():
-  with pytest.raises(FileNotFoundError, match="Combined file not found"):
-    bkd.merge_with_combined({"foo": ["bar"]}, "/nonexistent/combined")
-
-
-def test_merge_with_combined_empty_file(tmp_path):
-  src = tmp_path / "empty.combined"
-  src.write_text("", encoding="utf-8")
-
-  with pytest.raises(ValueError, match="Empty combined file"):
-    bkd.merge_with_combined({"foo": ["bar"]}, str(src))
+@pytest.mark.parametrize("content,error_cls,pattern", [
+    (None, FileNotFoundError, "Combined file not found"),
+    ("", ValueError, "Empty combined file"),
+])
+def test_merge_with_combined_errors(tmp_path, content, error_cls, pattern):
+  if content is not None:
+    src = tmp_path / "test.combined"
+    src.write_text(content, encoding="utf-8")
+    path = str(src)
+  else:
+    path = "/nonexistent/combined"
+  with pytest.raises(error_cls, match=pattern):
+    bkd.merge_with_combined({"foo": ["bar"]}, path)
 
 
 def test_merge_with_combined_no_existing_entries(tmp_path):
@@ -227,34 +229,19 @@ def test_main_merge_combined_missing_file(tmp_path):
 
 # pylint: disable=protected-access
 
-def test_extract_tags_flat_passthrough():
-  kaomoji = {"(╯°□°)╯︵┻━┻": ["tableflip", "rage"]}
-  result = bkd._extract_tags(kaomoji, locale="en")
-  assert result == kaomoji
-
-
-def test_extract_tags_single_locale():
-  kaomoji = {
-    "(◕‿◕)": {"en": ["happy", "cute"], "da": ["glad", "sød"]},
-  }
-  result = bkd._extract_tags(kaomoji, locale="da")
-  assert result["(◕‿◕)"] == ["glad", "sød"]
-
-
-def test_extract_tags_all_locales():
-  kaomoji = {
-    "(╯°□°)╯︵┻━┻": {"en": ["tableflip", "rage"], "da": ["bordvæltning", "raseri"]},
-  }
-  result = bkd._extract_tags(kaomoji, locale="en", all_locales=True)
-  assert sorted(result["(╯°□°)╯︵┻━┻"]) == sorted(["tableflip", "rage", "bordvæltning", "raseri"])
-
-
-def test_extract_tags_missing_locale():
-  kaomoji = {
-    "(◕‿◕)": {"en": ["happy"]},
-  }
-  result = bkd._extract_tags(kaomoji, locale="da")
-  assert result["(◕‿◕)"] == []
+@pytest.mark.parametrize("kaomoji,locale,all_locales,expected", [
+    ({"(╯°□°)╯︵┻━┻": ["tableflip", "rage"]},
+     "en", False, ["tableflip", "rage"]),
+    ({"(◕‿◕)": {"en": ["happy", "cute"], "da": ["glad", "sød"]}},
+     "da", False, ["glad", "sød"]),
+    ({"(╯°□°)╯︵┻━┻": {"en": ["tableflip", "rage"], "da": ["bordvæltning", "raseri"]}},
+     "en", True, ["tableflip", "rage", "bordvæltning", "raseri"]),
+    ({"(◕‿◕)": {"en": ["happy"]}},
+     "da", False, []),
+])
+def test_extract_tags(kaomoji, locale, all_locales, expected):
+  result = bkd._extract_tags(kaomoji, locale=locale, all_locales=all_locales)
+  assert sorted(result[list(kaomoji.keys())[0]]) == sorted(expected)
 
 
 def test_main_all_locales(tmp_path):
