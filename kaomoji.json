@@ -7,7 +7,7 @@
     "en": "Kaomoji dictionary",
     "da": "Kaomoji-ordbog"
   },
-  "version": 4,
+  "version": 5,
   "kaomoji": {
     "(◕‿◕)": {
       "en": [
@@ -51,12 +51,16 @@
       "en": [
         "happy",
         "content",
-        "blissful"
+        "blissful",
+        "peaceful",
+        "calm"
       ],
       "da": [
         "glad",
         "tilfreds",
-        "salig"
+        "salig",
+        "fredelig",
+        "rolig"
       ]
     },
     "(ᵔ◡ᵔ)": {
@@ -717,13 +721,17 @@
         "sleepy",
         "tired",
         "goodnight",
-        "drowsy"
+        "drowsy",
+        "yawn",
+        "sleep"
       ],
       "da": [
         "søvnig",
         "træt",
         "godnat",
-        "døsig"
+        "døsig",
+        "gab",
+        "sove"
       ]
     },
     "ʕ·ᴥ·ʔ": {
@@ -847,12 +855,16 @@
       "en": [
         "excited",
         "happy",
-        "jump"
+        "jump",
+        "cheer",
+        "woohoo"
       ],
       "da": [
         "begejstret",
         "glad",
-        "hop"
+        "hop",
+        "jubel",
+        "juhu"
       ]
     },
     "(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧": {
@@ -1052,13 +1064,15 @@
         "whatever",
         "meh",
         "nonchalant",
-        "shrug"
+        "shrug",
+        "shrugging"
       ],
       "da": [
         "ligemeget",
         "meh",
         "nonchalant",
-        "shrug"
+        "shrug",
+        "shrugging"
       ]
     },
     "(︶︹︺)": {
@@ -1344,13 +1358,15 @@
         "sweat",
         "nervous",
         "awkward",
-        "embarrassed"
+        "embarrassed",
+        "phew"
       ],
       "da": [
         "sved",
         "nervøs",
         "akavet",
-        "flov"
+        "flov",
+        "pyha"
       ]
     },
     "(；´Д｀)": {
@@ -1360,7 +1376,8 @@
         "struggling",
         "despair",
         "helpless",
-        "no_good"
+        "no_good",
+        "phew"
       ],
       "da": [
         "træt",
@@ -1368,23 +1385,27 @@
         "kæmper",
         "fortvivlelse",
         "hjælpeløs",
-        "no_good"
+        "no_good",
+        "pyha"
       ]
     },
+
     "(´-ω-`)": {
       "en": [
         "tired",
         "sleepy",
         "drowsy",
         "resigned",
-        "bleary"
+        "bleary",
+        "meh"
       ],
       "da": [
         "træt",
         "søvnig",
         "døsig",
         "resigneret",
-        "sløret"
+        "sløret",
+        "meh"
       ]
     },
     "(/ω＼)": {
@@ -1802,13 +1823,17 @@
         "dunno",
         "whatever",
         "clueless",
-        "helpless"
+        "helpless",
+        "shrug",
+        "shrugging"
       ],
       "da": [
         "vedikke",
         "ligemeget",
         "anelsesløs",
-        "hjælpeløs"
+        "hjælpeløs",
+        "shrug",
+        "shrugging"
       ]
     },
     "(ﾟ∀ﾟ)": {
@@ -1834,7 +1859,8 @@
         "pleading",
         "sorry",
         "begging",
-        "helpless"
+        "helpless",
+        "no_good"
       ],
       "da": [
         "kæmper",
@@ -1843,7 +1869,8 @@
         "sorry",
         "undskyld",
         "tigger",
-        "hjælpeløs"
+        "hjælpeløs",
+        "no_good"
       ]
     },
     "(´；ω；`)": {
