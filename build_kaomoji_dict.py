@@ -59,6 +59,8 @@ def merge_with_combined(
   kaomoji_map: dict[str, list[str]],
   combined_path: str | Path,
   description: str = "Kaomoji dictionary",
+  version: int = 1,
+  all_locales: bool = False,
   date: int | None = None,
 ) -> str:
   """Merge kaomoji entries into an existing .combined wordlist file."""
@@ -78,35 +80,42 @@ def merge_with_combined(
 
   header = lines[0]
   orig_desc = ""
+  orig_version = None
   for part in header.split(","):
     if part.startswith("description="):
       orig_desc = part.split("=", 1)[1]
-      break
-  full_desc = f"{description} ({orig_desc})" if orig_desc else description
-  header = _patch_header(header, description=full_desc, date=date)
+    elif part.startswith("version="):
+      orig_version = int(part.split("=", 1)[1])
 
+  marker = " <all locales>" if all_locales else ""
+  full_desc = (
+    f"{description}{marker} ({orig_desc} v{orig_version})"
+    if orig_desc and orig_version is not None
+    else description
+  )
+
+  header = _patch_header(header, description=full_desc, date=date, version=version)
   kaomoji_lines = _build_kaomoji_lines(kaomoji_map)
   existing = lines[1:] if len(lines) > 1 else []
   return "\n".join([header] + existing + kaomoji_lines)
 
 
-def _patch_header(header: str, description: str, date: int) -> str:
+def _patch_header(header: str, description: str, date: int, version: int = 1) -> str:
   parts = header.split(",")
-  bumped = False
+  seen_version = False
   new_parts = []
   for part in parts:
     if part.startswith("description="):
       new_parts.append(f"description={description}")
     elif part.startswith("date="):
       new_parts.append(f"date={date}")
-    elif part.startswith("version=") and not bumped:
-      bumped = True
-      ver = int(part.split("=", 1)[1]) + 1
-      new_parts.append(f"version={ver}")
+    elif part.startswith("version="):
+      new_parts.append(f"version={version}")
+      seen_version = True
     else:
       new_parts.append(part)
-  if not bumped:
-    new_parts.append("version=1")
+  if not seen_version:
+    new_parts.append(f"version={version}")
   return ",".join(new_parts)
 
 
@@ -247,9 +256,6 @@ def main() -> None:
   else:
     description = desc_raw
 
-  if args.all_locales:
-    description = f"{description} (all locales)"
-
   kaomoji_flat = _extract_tags(kaomoji_map, locale, args.all_locales)
 
   if args.merge_combined:
@@ -257,7 +263,10 @@ def main() -> None:
     if not combined_path.is_file():
       print(f"error: combined file not found: {args.merge_combined}", file=sys.stderr)
       sys.exit(1)
-    combined = merge_with_combined(kaomoji_flat, str(combined_path), description)
+    combined = merge_with_combined(
+      kaomoji_flat, str(combined_path), description,
+      version=build_version, all_locales=args.all_locales,
+    )
   else:
     combined = build_combined(kaomoji_flat, locale, description, build_version)
 

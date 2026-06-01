@@ -27,7 +27,7 @@ def test_merge_with_combined_basic(tmp_path):
   assert len(lines) == 5
   assert lines[0] == (
     "dictionary=emoji:en,locale=en,"
-    f"description=Kaomoji dictionary (Emoji dictionary),date={FREEZE_TS},version=4"
+    f"description=Kaomoji dictionary (Emoji dictionary v3),date={FREEZE_TS},version=1"
   )
   assert lines[1] == " word=smile,f=200"
   assert lines[2] == " word=heart,f=150"
@@ -63,7 +63,7 @@ def test_merge_with_combined_updates_description(tmp_path):
     result = bkd.merge_with_combined(kaomoji, str(src), "Updated description")
 
   header = result.split("\n", maxsplit=1)[0]
-  assert "description=Updated description (Old desc)" in header
+  assert "description=Updated description (Old desc v1)" in header
 
 
 def test_merge_with_combined_file_not_found():
@@ -92,7 +92,7 @@ def test_merge_with_combined_no_existing_entries(tmp_path):
 
   lines = result.split("\n")
   assert len(lines) == 3
-  assert "version=2" in lines[0]
+  assert "version=1" in lines[0]
   assert "tableflip" in lines[1]
 
 
@@ -319,4 +319,4 @@ def test_main_all_locales_combined_desc(tmp_path, capsys):
     bkd.main()
 
   out = capsys.readouterr().out
-  assert "Da ordbog (all locales) (Dansk emoji)" in out
+  assert "Da ordbog <all locales> (Dansk emoji v1)" in out
