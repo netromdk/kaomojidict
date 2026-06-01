@@ -201,8 +201,8 @@ def main() -> None:
     help="Dictionary version (JSON field takes precedence; default: %(default)s)",
   )
   parser.add_argument(
-    "--no-bump", action="store_true",
-    help="Do not bump the version in the input JSON file",
+    "--bump", action="store_true",
+    help="Bump the version in the input JSON file",
   )
   parser.add_argument(
     "--all-locales", action="store_true",
@@ -246,7 +246,7 @@ def main() -> None:
   version = data.get("version", args.version)
   if not isinstance(version, int) or version < 1:
     version = 1
-  build_version = version + 1 if not args.no_bump else version
+  build_version = version + 1 if args.bump else version
 
   desc_raw = data.get("description", args.description)
   description: str
@@ -286,7 +286,7 @@ def main() -> None:
     print(f"error: {e}", file=sys.stderr)
     sys.exit(1)
 
-  if not args.no_bump:
+  if args.bump:
     data["version"] = build_version
     with open(args.input, "w", encoding="utf-8") as f:
       json.dump(data, f, indent=2, ensure_ascii=False)

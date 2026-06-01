@@ -55,6 +55,7 @@ def test_main_version_bumped_on_success(tmp_path):
   with patch("sys.argv", [
       "build_kaomoji_dict.py", str(input_file),
       "-o", str(tmp_path / "out.dict"), "--jar", str(tmp_path / "dummy.jar"),
+      "--bump",
     ]), \
       patch("shutil.which", return_value="/usr/bin/java"), \
       patch("pathlib.Path.is_file", return_value=True), \
@@ -101,6 +102,7 @@ def test_main_version_starts_at_one_when_missing(tmp_path):
   with patch("sys.argv", [
       "build_kaomoji_dict.py", str(input_file),
       "-o", str(tmp_path / "out.dict"), "--jar", str(tmp_path / "dummy.jar"),
+      "--bump",
     ]), \
       patch("shutil.which", return_value="/usr/bin/java"), \
       patch("pathlib.Path.is_file", return_value=True), \
@@ -124,6 +126,7 @@ def test_main_version_starts_at_one_when_invalid(tmp_path):
   with patch("sys.argv", [
       "build_kaomoji_dict.py", str(input_file),
       "-o", str(tmp_path / "out.dict"), "--jar", str(tmp_path / "dummy.jar"),
+      "--bump",
     ]), \
       patch("shutil.which", return_value="/usr/bin/java"), \
       patch("pathlib.Path.is_file", return_value=True), \
@@ -148,6 +151,7 @@ def test_main_version_starts_at_one_when_below_one(tmp_path):
   with patch("sys.argv", [
       "build_kaomoji_dict.py", str(input_file),
       "-o", str(tmp_path / "out.dict"), "--jar", str(tmp_path / "dummy.jar"),
+      "--bump",
     ]), \
       patch("shutil.which", return_value="/usr/bin/java"), \
       patch("pathlib.Path.is_file", return_value=True), \

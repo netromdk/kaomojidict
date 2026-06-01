@@ -119,7 +119,6 @@ def test_main_no_bump_keeps_file_unchanged(tmp_path):
   with patch("sys.argv", [
       "build_kaomoji_dict.py", str(input_file),
       "-o", str(tmp_path / "out.dict"), "--jar", str(tmp_path / "dummy.jar"),
-      "--no-bump",
     ]), \
       patch("shutil.which", return_value="/usr/bin/java"), \
       patch("pathlib.Path.is_file", return_value=True), \
@@ -142,7 +141,7 @@ def test_main_no_bump_uses_original_version_in_build(tmp_path, capsys):
   with patch("sys.argv", [
       "build_kaomoji_dict.py", str(input_file),
       "-o", str(tmp_path / "out.dict"), "--jar", str(tmp_path / "dummy.jar"),
-      "--no-bump", "--verbose",
+      "--verbose",
     ]), \
       patch("shutil.which", return_value="/usr/bin/java"), \
       patch("pathlib.Path.is_file", return_value=True), \

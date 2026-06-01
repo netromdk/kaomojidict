@@ -35,7 +35,7 @@ for locale in $locales; do
   else
     echo ""
     echo "=== Building $dict (merged with $combined) ==="
-    python build_kaomoji_dict.py "$json" --no-bump --locale "$locale" \
+    python build_kaomoji_dict.py "$json" --locale "$locale" \
       --merge-combined "$combined" --output "$dict"
     touch "$dict"
     built=$((built + 1))
@@ -51,7 +51,7 @@ for locale in $locales; do
   else
     echo ""
     echo "=== Building $dict_all (merged + all locales) ==="
-    python build_kaomoji_dict.py "$json"  --no-bump --locale "$locale" --all-locales \
+    python build_kaomoji_dict.py "$json" --locale "$locale" --all-locales \
       --merge-combined "$combined" --output "$dict_all"
     touch "$dict_all"
     built=$((built + 1))
