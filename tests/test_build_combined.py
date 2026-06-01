@@ -10,7 +10,7 @@ def test_build_combined_basic():
   lines = result.split("\n")
   assert len(lines) == 1 + sum(2 * len(v) for v in kaomoji.values())
   assert lines[0] == (
-    "dictionary=emoji:en,locale=en,"
+    "dictionary=kaomoji:en,locale=en,"
     "description=Kaomoji dictionary,"
     f"date={FREEZE_TS},version=1"
   )
@@ -58,7 +58,7 @@ def test_build_combined_custom_metadata():
     result = bkd.build_combined(kaomoji, locale="ja", description="My dict", version=3)
   first = result.split("\n", maxsplit=1)[0]
   assert "locale=ja" in first
-  assert "emoji:ja" in first
+  assert "kaomoji:ja" in first
   assert "description=My dict" in first
   assert "version=3" in first
 
@@ -75,3 +75,10 @@ def test_build_combined_special_chars():
 
 def test_KAOMOJI_FLAGS_value():
   assert bkd.KAOMOJI_FLAGS == bkd.NOT_A_WORD | bkd.HAS_EMOJI | bkd.PROBING
+
+
+def test_build_combined_dictionary_type():
+  result = bkd.build_combined({}, locale="en")
+  header = result.split("\n", maxsplit=1)[0]
+  assert "dictionary=kaomoji:en" in header
+  assert "emoji:en" not in header

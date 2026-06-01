@@ -26,7 +26,7 @@ def test_merge_with_combined_basic(tmp_path):
   lines = result.split("\n")
   assert len(lines) == 5
   assert lines[0] == (
-    "dictionary=emoji:en,locale=en,"
+    "dictionary=kaomoji:en,locale=en,"
     f"description=Kaomoji dictionary (Emoji dictionary v3),date={FREEZE_TS},version=1"
   )
   assert lines[1] == " word=smile,f=200"
@@ -47,7 +47,7 @@ def test_merge_with_combined_preserves_header_type_and_locale(tmp_path):
     result = bkd.merge_with_combined(kaomoji, str(src), "Kaomoji")
 
   header = result.split("\n", maxsplit=1)[0]
-  assert "dictionary=emoji:da" in header
+  assert "dictionary=kaomoji:da" in header
   assert "locale=da" in header
 
 

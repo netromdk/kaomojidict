@@ -48,7 +48,7 @@ def build_combined(
   if date is None:
     date = int(time.time())
   lines = [
-    f"dictionary=emoji:{locale},locale={locale},"
+    f"dictionary=kaomoji:{locale},locale={locale},"
     f"description={description},date={date},version={version}",
   ]
   lines += _build_kaomoji_lines(kaomoji_map)
@@ -81,11 +81,14 @@ def merge_with_combined(
   header = lines[0]
   orig_desc = ""
   orig_version = None
+  locale_from_header = ""
   for part in header.split(","):
     if part.startswith("description="):
       orig_desc = part.split("=", 1)[1]
     elif part.startswith("version="):
       orig_version = int(part.split("=", 1)[1])
+    elif part.startswith("locale="):
+      locale_from_header = part.split("=", 1)[1]
 
   marker = " <all locales>" if all_locales else ""
   full_desc = (
@@ -94,13 +97,15 @@ def merge_with_combined(
     else description
   )
 
-  header = _patch_header(header, description=full_desc, date=date, version=version)
+  header = _patch_header(header, description=full_desc, date=date, version=version,
+                         locale=locale_from_header)
   kaomoji_lines = _build_kaomoji_lines(kaomoji_map)
   existing = lines[1:] if len(lines) > 1 else []
   return "\n".join([header] + existing + kaomoji_lines)
 
 
-def _patch_header(header: str, description: str, date: int, version: int = 1) -> str:
+def _patch_header(header: str, description: str, date: int, version: int = 1,
+                  locale: str | None = None) -> str:
   parts = header.split(",")
   seen_version = False
   new_parts = []
@@ -112,6 +117,8 @@ def _patch_header(header: str, description: str, date: int, version: int = 1) ->
     elif part.startswith("version="):
       new_parts.append(f"version={version}")
       seen_version = True
+    elif part.startswith("dictionary=") and locale is not None:
+      new_parts.append(f"dictionary=kaomoji:{locale}")
     else:
       new_parts.append(part)
   if not seen_version:
