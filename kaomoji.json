@@ -9,67 +9,51 @@
   },
   "version": 5,
   "kaomoji": {
-    "(◕‿◕)": {
+    "( •̯́ ₃ •̯̀)": {
       "en": [
-        "happy",
-        "cute",
-        "smile"
+        "😇",
+        "innocent",
+        "not me",
+        "I swear"
       ],
       "da": [
-        "glad",
-        "sød",
-        "smile",
-        "smil"
+        "😇",
+        "uskyldig",
+        "ikke mig"
       ]
     },
     "(＾▽＾)": {
       "en": [
+        "😄",
+        ":D",
         "happy",
         "cheerful",
+        "yay",
+        "woohoo",
         "joy"
       ],
       "da": [
+        "😄",
+        ":D",
         "glad",
+        "jubi",
+        "juhu",
         "munter",
         "glæde"
       ]
     },
-    "(^_^)": {
-      "en": [
-        "happy",
-        "smile",
-        "cheerful"
-      ],
-      "da": [
-        "glad",
-        "smile",
-        "smil",
-        "munter"
-      ]
-    },
-    "(─‿─)": {
-      "en": [
-        "happy",
-        "content",
-        "blissful",
-        "peaceful",
-        "calm"
-      ],
-      "da": [
-        "glad",
-        "tilfreds",
-        "salig",
-        "fredelig",
-        "rolig"
-      ]
-    },
     "(ᵔ◡ᵔ)": {
       "en": [
+        "☺️",
+        ":)",
         "happy",
         "cute",
+        "aw",
         "smile"
       ],
       "da": [
+        "☺️",
+        ":)",
         "glad",
         "sød",
         "smile",
@@ -78,24 +62,15 @@
     },
     "(•‿•)": {
       "en": [
+        "🙂",
+        ":)",
         "happy",
         "cute",
         "smile"
       ],
       "da": [
-        "glad",
-        "sød",
-        "smile",
-        "smil"
-      ]
-    },
-    "(⌒‿⌒)": {
-      "en": [
-        "happy",
-        "sweet",
-        "smile"
-      ],
-      "da": [
+        "🙂",
+        ":)",
         "glad",
         "sød",
         "smile",
@@ -104,87 +79,242 @@
     },
     "(◠‿◠✿)": {
       "en": [
+        "🙂",
+        ":)",
         "happy",
         "cute",
         "flower",
         "sweet"
       ],
       "da": [
+        "🙂",
+        ":)",
         "glad",
         "sød",
         "blomst"
       ]
     },
-    "ヽ(´▽｀)/": {
+    "(◡ ‿ ◡ )": {
       "en": [
+        "😌",
+        "happy",
+        "content",
+        "blissful",
+        "peaceful",
+        "calm"
+      ],
+      "da": [
+        "😌",
+        "glad",
+        "tilfreds",
+        "salig",
+        "fredelig",
+        "rolig"
+      ]
+    },
+    "(🖤‿🖤)": {
+      "en": [
+        "😍",
+        "<3",
+        "love",
+        "aww",
+        "nice",
+        "heart",
+        "sweet"
+      ],
+      "da": [
+        "😍",
+        "kærlighed",
+        "hjerte",
+        "sød",
+        "forelsket"
+      ]
+    },
+    "(っ˶ ˘ ᵕ˘)ˆᵕ ˆ˶ς)": {
+      "en": [
+        "🫂",
+        "love",
+        "cuddle",
+        "kiss",
+        "hug"
+      ],
+      "da": [
+        "🫂",
+        "kærlighed",
+        "putte",
+        "kys",
+        "kram"
+      ]
+    },
+    "(づ｡◕‿‿◕｡)づ": {
+      "en": [
+        "🫂",
+        "hug",
+        "love",
+        "gimme",
+        "mine",
+        "cuddle",
+        "embrace",
+        "snuggle"
+      ],
+      "da": [
+        "🫂",
+        "kram",
+        "kærlighed",
+        "min",
+        "putte",
+        "omfavn"
+      ]
+    },
+    "(づ￣ ³￣)づ": {
+      "en": [
+        "🫂",
+        ":3",
+        "hug",
+        "kiss",
+        "love",
+        "cuddle",
+        "embrace",
+        "snuggle"
+      ],
+      "da": [
+        "🫂",
+        ":3",
+        "kram",
+        "kys",
+        "kærlighed",
+        "putte",
+        "omfavn"
+      ]
+    },
+    "⊂(◉‿◉)つ": {
+      "en": [
+        "🫂",
+        "grab",
+        "hug",
+        "embrace",
+        "mine",
+        "gimme"
+      ],
+      "da": [
+        "🫂",
+        "tag",
+        "kram",
+        "omfavn",
+        "giv"
+      ]
+    },
+    "٩(^ᗜ^ )و ´-": {
+      "en": [
+        "🎉",
+        "🥳",
         "happy",
         "dance",
+        "woohoo",
         "celebrate",
         "yay"
       ],
       "da": [
+        "🎉",
+        "🥳",
         "glad",
         "dans",
         "fejre",
-        "fejrer",
-        "juhu",
-        "yay"
-      ]
-    },
-    "ヽ(•‿•)ノ": {
-      "en": [
-        "happy",
-        "dance",
-        "celebrate"
-      ],
-      "da": [
-        "glad",
-        "dans",
-        "fejre",
-        "fejrer"
+        "fest",
+        "jubi",
+        "juhu"
       ]
     },
     "♪～(´ε｀　)": {
       "en": [
+        "🎶",
+        "🎵",
         "happy",
         "sing",
         "music",
         "dance"
       ],
       "da": [
+        "🎶",
+        "🎵",
         "glad",
         "syng",
         "musik",
         "dans"
       ]
     },
-    "٩(◕‿◕)۶": {
+    "( • ᴗ - ) ✧": {
       "en": [
-        "happy",
-        "excited",
-        "celebrate"
+        "😉",
+        "wink",
+        ";)",
+        "ok",
+        "got it"
       ],
       "da": [
-        "glad",
-        "begejstret",
-        "fejre",
-        "fejrer"
+        "😉",
+        "blink",
+        ";)",
+        "ok"
       ]
     },
-    "★~(◡‿◡✿)": {
+    "(๑>؂•̀๑)": {
       "en": [
-        "happy",
-        "cute",
-        "lovely"
+        "😉",
+        "😜",
+        "wink",
+        ";)",
+        ";P",
+        "hehe",
+        "ok",
+        "of course",
+        "naughty",
+        "playful",
+        "joking",
+        "got it"
       ],
       "da": [
-        "glad",
-        "sød",
-        "dejlig"
+        "😉",
+        "😜",
+        "blink",
+        ";)",
+        ";P",
+        "hehe",
+        "ok",
+        "selvfølgelig",
+        "legesyge",
+        "for sjov",
+        "fræk"
+      ]
+    },
+    "(◞‸◟)": {
+      "en": [
+        "😞",
+        ":(",
+        "sad",
+        "lonely",
+        "meh",
+        "exhausted",
+        "depressed",
+        "cry",
+        "despair"
+      ],
+      "da": [
+        "😞",
+        ":(",
+        "trist",
+        "ensom",
+        "deprimeret",
+        "depri",
+        "gråd",
+        "fortvivlelse"
       ]
     },
     "(╥﹏╥)": {
       "en": [
+        "😭",
+        ":'(",
+        ":_(",
         "cry",
         "sad",
         "tears",
@@ -192,6 +322,9 @@
         "weeping"
       ],
       "da": [
+        "😭",
+        ":'(",
+        ":_(",
         "gråd",
         "trist",
         "tårer",
@@ -201,41 +334,39 @@
     },
     "(｡ŏ﹏ŏ)": {
       "en": [
+        "😭",
+        "😢",
+        ":'(",
+        ":_(",
         "cry",
         "sad",
         "worried"
       ],
       "da": [
+        "😭",
+        "😢",
+        ":'(",
+        ":_(",
         "gråd",
         "trist",
         "bekymret"
       ]
     },
-    "(T_T)": {
-      "en": [
-        "cry",
-        "sad",
-        "tears",
-        "sob",
-        "weeping"
-      ],
-      "da": [
-        "gråd",
-        "trist",
-        "tårer",
-        "hulk",
-        "græder"
-      ]
-    },
     "(ಥ﹏ಥ)": {
       "en": [
+        "😭",
+        ":'(",
+        ":_(",
         "cry",
         "sad",
         "sobbing",
         "sob",
-        "weeping"
+        "weep"
       ],
       "da": [
+        "😭",
+        ":'(",
+        ":_(",
         "gråd",
         "trist",
         "hulkende",
@@ -246,170 +377,347 @@
     },
     "(；д；)": {
       "en": [
+        "😭",
+        ":'(",
+        ":_(",
         "cry",
         "sad",
+        "nooo",
+        "omg",
         "tears",
         "sob",
-        "weeping"
+        "weep"
       ],
       "da": [
+        "😭",
+        ":'(",
+        ":_(",
         "gråd",
         "trist",
+        "neeej",
+        "omg",
         "tårer",
         "hulk",
         "græder"
       ]
     },
-    "(ノ﹏ヽ)": {
+    "(·•᷄‎ࡇ•᷅ )": {
       "en": [
-        "cry",
-        "sad",
+        "😥",
+        "ah",
+        "but",
         "sorry",
-        "despair",
-        "begging",
-        "helpless"
+        "please",
+        "sad",
+        "help"
       ],
       "da": [
-        "gråd",
+        "😥",
+        "men",
         "trist",
         "sorry",
         "undskyld",
-        "fortvivlelse",
-        "tigger",
-        "hjælpeløs"
+        "hjælp"
       ]
     },
-    "(◕‿◕✿)": {
+    "(ㅅ´ ˘ `)": {
       "en": [
-        "love",
-        "cute",
-        "sweet",
-        "flower"
+        "🥺",
+        "please",
+        "pls",
+        "help",
+        "thank you",
+        "thanks"
       ],
       "da": [
-        "kærlighed",
-        "sød",
-        "blomst"
+        "🥺",
+        "please",
+        "hjælp",
+        "tusind tak",
+        "vær venlig",
+        "tak"
       ]
     },
-    "(♥_♥)": {
+    "ദ്ദി(˃ ᵕ ˂ ദ്ദി)": {
       "en": [
-        "love",
-        "heart",
-        "adore",
-        "love_struck"
+        "👍",
+        "well done",
+        "gotcha",
+        "amazing",
+        "deal",
+        "cool",
+        "noice",
+        "nice",
+        "good job"
       ],
       "da": [
-        "kærlighed",
-        "hjerte",
-        "elsker",
-        "forelsket"
+        "👍",
+        "godt gået",
+        "flot klaret",
+        "fedt",
+        "fantastisk",
+        "aftale"
       ]
     },
-    "(❤‿❤)": {
+    "ദ്ദി(ᵔᗜᵔ)": {
       "en": [
-        "love",
-        "heart",
-        "sweet",
-        "love_struck"
+        "👍",
+        "well done",
+        "gotcha",
+        "amazing",
+        "deal",
+        "cool",
+        "noice",
+        "nice",
+        "good job",
+        "no problem",
+        "you're welcome",
+        "welcome",
+        "yw",
+        "yes"
       ],
       "da": [
-        "kærlighed",
-        "hjerte",
-        "sød",
-        "forelsket"
+        "👍",
+        "godt gået",
+        "flot klaret",
+        "fedt",
+        "dejligt",
+        "fantastisk",
+        "intet problem",
+        "det var så lidt",
+        "selv tak",
+        "ja"
       ]
     },
-    "(ɔˆ ³(ˆ⌣ˆc)": {
+    "(≖_≖ )NO": {
       "en": [
-        "love",
-        "kiss",
-        "hug"
+        "no",
+        "nope"
       ],
       "da": [
-        "kærlighed",
-        "kys",
-        "kram"
+        "nej"
       ]
     },
-    "(づ｡◕‿‿◕｡)づ": {
+    "( ＾◡＾)っ NO": {
       "en": [
-        "hug",
-        "love",
-        "cuddle",
-        "embrace",
-        "snuggle"
+        "no",
+        "nope"
       ],
       "da": [
-        "kram",
-        "kærlighed",
-        "putte",
-        "omfavn"
+        "nej"
       ]
     },
-    "♡(◕‿◕)♡": {
+    "ヾ(๑╹◡╹)ﾉ🔪": {
       "en": [
-        "love",
-        "heart",
-        "cute"
+        "🗡",
+        "🔪",
+        "no",
+        "nope",
+        "knife",
+        "ready",
+        "try me"
       ],
       "da": [
-        "kærlighed",
-        "hjerte",
-        "sød"
+        "🗡",
+        "🔪",
+        "no",
+        "kniv",
+        "klar",
+        "prøv mig"
+      ]
+    },
+    "(っ'-')╮=͟͟͞🍋)`-' )": {
+      "en": [
+        "🍋",
+        "shut up",
+        "quiet",
+        "hush",
+        "enough"
+      ],
+      "da": [
+        "🍋",
+        "hold kæft",
+        "ti stille",
+        "nok"
       ]
     },
     "(╯°□°)╯︵┻━┻": {
       "en": [
+        "😠",
         "tableflip",
         "flip",
         "rage",
+        "mad",
+        "ugh",
+        "ffs",
+        "dammit",
         "angry",
         "frustrated",
         "wild",
         "crazy"
       ],
       "da": [
-        "tableflip",
+        "😠",
+        "bordkast",
         "flip",
         "raseri",
-        "rage",
+        "pokker",
         "vred",
         "frustreret",
         "vild",
         "skør"
       ]
     },
-    "(ノಠ益ಠ)ノ": {
+    "(╯°□°)╯︵ɹǝʌǝʇɐɥʍ": {
       "en": [
         "tableflip",
         "flip",
-        "angry",
         "rage",
-        "frustrated",
-        "wild",
-        "crazy"
+        "angry",
+        "whatever",
+        "frustrated"
       ],
       "da": [
         "tableflip",
         "flip",
-        "vred",
         "raseri",
         "rage",
+        "vred",
+        "pyt",
+        "frustreret"
+      ]
+    },
+    "(ノಠ益ಠ)ノ︵┻━┻": {
+      "en": [
+        "😠",
+        "tableflip",
+        "flip",
+        "angry",
+        "mad",
+        "ffs",
+        "rage",
+        "frustrated",
+        "whatever",
+        "wild",
+        "crazy"
+      ],
+      "da": [
+        "😠",
+        "bordkast",
+        "flip",
+        "vred",
+        "raseri",
         "frustreret",
+        "pyt",
         "vild",
         "skør"
+      ]
+    },
+    "(╯°□°)╯︵dol$oɹɔᴉW": {
+      "en": [
+        "microslop",
+        "microsoft",
+        "flip",
+        "angry",
+        "mad"
+      ],
+      "da": [
+        "microslop",
+        "microsoft",
+        "flip",
+        "vred",
+        "raseri"
+      ]
+    },
+    "(╯°□°)╯︵ ʞooqǝɔɐɟ": {
+      "en": [
+        "facebook",
+        "flip",
+        "angry",
+        "mad"
+      ],
+      "da": [
+        "facebook",
+        "flip",
+        "vred",
+        "raseri"
+      ]
+    },
+    "(╯°□°)╯︵ I∀uǝdO": {
+      "en": [
+        "openai",
+        "flip",
+        "angry",
+        "mad"
+      ],
+      "da": [
+        "openai",
+        "flip",
+        "vred",
+        "raseri"
+      ]
+    },
+    "(╯°□°)╯︵ ɔᴉdoɹɥʇu∀sᴉɯ": {
+      "en": [
+        "anthropic",
+        "misanthropic",
+        "flip",
+        "angry",
+        "mad"
+      ],
+      "da": [
+        "openai",
+        "flip",
+        "vred",
+        "raseri"
+      ]
+    },
+    "(╯°□°)╯︵ I∀ǝpnɐlƆ": {
+      "en": [
+        "claudeai",
+        "flip",
+        "angry",
+        "mad"
+      ],
+      "da": [
+        "claudeai",
+        "flip",
+        "vred",
+        "raseri"
+      ]
+    },
+    "(╯°□°)╯︵ ǝpoƆ ǝpnɐlƆ": {
+      "en": [
+        "claudecode",
+        "claude code",
+        "claude",
+        "flip",
+        "angry",
+        "mad"
+      ],
+      "da": [
+        "claudecode",
+        "claude code",
+        "claude",
+        "flip",
+        "vred",
+        "raseri"
       ]
     },
     "(｀皿´)": {
       "en": [
+        "😠",
         "angry",
+        "agh",
         "mad",
+        "ffs",
+        "dammit",
         "frustrated",
         "grumpy",
         "irritated"
       ],
       "da": [
+        "😠",
         "vred",
         "sur",
         "frustreret",
@@ -417,55 +725,41 @@
         "ærgerlig"
       ]
     },
-    "ಠ_ಠ": {
+    "(๑•̀ᗝ•́)૭": {
       "en": [
-        "disapproval",
-        "disappointed",
-        "judging",
-        "skeptical"
-      ],
-      "da": [
-        "misbilligelse",
-        "skuffet",
-        "dømmende",
-        "skeptisk"
-      ]
-    },
-    "(╬ Ò﹏Ó)": {
-      "en": [
+        "😤",
+        "😠",
         "angry",
+        "wtf",
         "furious",
+        "fight",
         "mad"
       ],
       "da": [
+        "😤",
+        "😠",
         "vred",
+        "wtf",
         "rasende",
+        "kamp",
+        "kom an",
         "sur"
-      ]
-    },
-    "(｀´)": {
-      "en": [
-        "angry",
-        "annoyed",
-        "grumpy",
-        "irritated"
-      ],
-      "da": [
-        "vred",
-        "irriteret",
-        "gnaven",
-        "ærgerlig"
       ]
     },
     "(｀∀´)": {
       "en": [
+        "😏",
+        "😈",
         "evil",
         "smug",
+        "mwhaha",
         "sinister",
         "plotting",
         "wicked"
       ],
       "da": [
+        "😏",
+        "😈",
         "ond",
         "smug",
         "uhyggelig",
@@ -473,8 +767,9 @@
         "ondskabsfuld"
       ]
     },
-    "¯\\_(ツ)_/¯": {
+    "¯╲_(ツ)_╱¯": {
       "en": [
+        "🤷",
         "shrug",
         "shrugging",
         "whatever",
@@ -482,6 +777,7 @@
         "dunno"
       ],
       "da": [
+        "🤷",
         "shrug",
         "shrugging",
         "ligemeget",
@@ -489,101 +785,102 @@
         "vedikke"
       ]
     },
-    "¯\\_(⊙_⊙)_/¯": {
+    "¯╲_(⊙_⊙)_╱¯": {
       "en": [
+        "🤷",
+        "😐",
         "shrug",
         "confused",
         "whatever",
         "sure"
       ],
       "da": [
+        "🤷",
+        "😐",
         "shrug",
         "forvirret",
         "ligemeget",
         "sikkert"
       ]
     },
-    "(⊙_⊙)": {
+    "( ╹ -╹)?": {
       "en": [
+        "???",
+        "huh",
         "surprised",
         "shocked",
         "confused",
-        "gasp"
+        "what",
+        "whut"
       ],
       "da": [
+        "???",
         "overrasket",
         "chokeret",
         "forvirret",
-        "gisp"
-      ]
-    },
-    "(○o○)": {
-      "en": [
-        "surprised",
-        "shocked",
-        "amazed",
-        "gasp"
-      ],
-      "da": [
-        "overrasket",
-        "chokeret",
-        "forbløffet",
-        "gisp"
+        "hvad"
       ]
     },
     "(ﾟoﾟ)": {
       "en": [
+        "😮",
         "surprised",
         "shocked",
+        "what",
+        "omg",
         "astonished",
         "gasp"
       ],
       "da": [
+        "😮",
         "overrasket",
         "chokeret",
+        "hvad",
+        "omg",
         "forbløffet",
         "gisp"
       ]
     },
-    "(□_□)": {
+    "( ˶°ㅁ°) !!": {
       "en": [
+        "‼️",
+        "🫢",
+        "!!!",
         "surprised",
         "shocked",
         "speechless",
-        "gasp"
+        "gasp",
+        "omg"
       ],
       "da": [
+        "‼️",
+        "🫢",
+        "!!!",
         "overrasket",
         "chokeret",
         "målløs",
+        "omg",
         "gisp"
-      ]
-    },
-    "(@_@)": {
-      "en": [
-        "dazed",
-        "confused",
-        "shocked"
-      ],
-      "da": [
-        "svimmel",
-        "forvirret",
-        "chokeret"
       ]
     },
     "(￣▽￣)ノ": {
       "en": [
+        "🌊",
+        "👋",
         "wave",
         "hello",
+        "hey",
+        "hi",
         "greeting",
         "cool"
       ],
       "da": [
+        "🌊",
+        "👋",
         "vinke",
         "vinker",
         "hallo",
         "hej",
-        "hello",
         "hilsen",
         "sej",
         "fedt",
@@ -592,6 +889,7 @@
     },
     "(•̀ᴗ•́)و": {
       "en": [
+        "💪",
         "motivated",
         "determined",
         "yes",
@@ -600,6 +898,7 @@
         "spirit"
       ],
       "da": [
+        "💪",
         "motiveret",
         "beslutsom",
         "ja",
@@ -626,24 +925,9 @@
         "ånd"
       ]
     },
-    "(｀・ω・´)": {
+    "(ง •̀_•́)ง": {
       "en": [
-        "determined",
-        "confident",
-        "smug",
-        "poised",
-        "serious"
-      ],
-      "da": [
-        "beslutsom",
-        "selvsikker",
-        "smug",
-        "fattet",
-        "seriøs"
-      ]
-    },
-    "p(^^)q": {
-      "en": [
+        "💪",
         "fight",
         "spirit",
         "motivated",
@@ -651,6 +935,7 @@
         "determined"
       ],
       "da": [
+        "💪",
         "kæmp",
         "ånd",
         "motiveret",
@@ -658,36 +943,38 @@
         "beslutsom"
       ]
     },
-    "(*^^)v": {
+    "✌️(ᵔᗜᵔ)✌️": {
       "en": [
+        "✌️",
         "victory",
         "win",
         "peace",
-        "success",
-        "v_sign"
+        "success"
       ],
       "da": [
+        "✌️",
         "sejr",
         "vind",
         "fred",
-        "succes",
-        "v_tegn"
+        "succes"
       ]
     },
     "ヽ(￣д￣;)ノ": {
       "en": [
+        "😱",
         "panic",
         "worried",
         "oh no",
         "helpless",
-        "no_good"
+        "yikes"
       ],
       "da": [
+        "😱",
         "panik",
         "bekymret",
         "åh nej",
         "hjælpeløs",
-        "no_good"
+        "uha"
       ]
     },
     "(；一_一)": {
@@ -706,29 +993,61 @@
     },
     "(－‸ლ)": {
       "en": [
+        "🤦",
         "facepalm",
         "disappointed",
         "sigh"
       ],
       "da": [
+        "🤦",
         "facepalm",
         "skuffet",
         "suk"
       ]
     },
-    "(╯˘～˘)╯": {
+    "(ᵕ – ⌓ – )": {
       "en": [
+        "🫩",
         "sleepy",
         "tired",
         "goodnight",
+        "gn",
         "drowsy",
         "yawn",
         "sleep"
       ],
       "da": [
+        "🫩",
         "søvnig",
         "træt",
         "godnat",
+        "gn",
+        "døsig",
+        "gab",
+        "sove"
+      ]
+    },
+    "/ᐠ - ˕ -マ ᶻ 𝗓 𐰁": {
+      "en": [
+        "💤",
+        "😴",
+        "zzz",
+        "sleepy",
+        "tired",
+        "goodnight",
+        "gn",
+        "drowsy",
+        "yawn",
+        "sleep"
+      ],
+      "da": [
+        "💤",
+        "😴",
+        "zzz",
+        "søvnig",
+        "træt",
+        "godnat",
+        "gn",
         "døsig",
         "gab",
         "sove"
@@ -736,11 +1055,13 @@
     },
     "ʕ·ᴥ·ʔ": {
       "en": [
+        "🧸",
         "bear",
         "cute",
         "fluffy"
       ],
       "da": [
+        "🧸",
         "bjørn",
         "sød",
         "fluffy",
@@ -750,83 +1071,93 @@
     },
     "ʕっ•ᴥ•ʔっ": {
       "en": [
+        "🧸",
+        "🫂",
         "bear",
         "hug",
         "cute"
       ],
       "da": [
         "bjørn",
+        "🧸",
         "kram",
         "sød"
       ]
     },
-    "(=^･ｪ･^=)": {
+    "₍^. .^₎⟆": {
       "en": [
+        "🐈‍⬛",
         "cat",
+        "peek",
         "cute",
         "kitty"
       ],
       "da": [
+        "🐈‍⬛",
         "kat",
+        "smugkig",
+        "kig",
         "sød",
         "mis",
         "kattekilling",
         "kitty"
       ]
     },
-    "(^・ω・^ )": {
+    "ฅ^>⩊<^ ฅ": {
       "en": [
+        "🐈‍⬛",
+        "hi",
+        "hey",
+        "hello",
         "cat",
         "cute",
         "neko"
       ],
       "da": [
+        "🐈‍⬛",
         "kat",
+        "hej",
+        "hejsa",
         "sød",
         "neko"
       ]
     },
     "ᓚᘏᗢ": {
       "en": [
+        "🐈‍⬛",
         "cat",
         "cute",
         "kitty",
         "sitting"
       ],
       "da": [
+        "🐈‍⬛",
         "kat",
         "sød",
         "mis",
         "kattekilling",
         "kitty",
-        "sidder"
+        "sidde"
       ]
     },
-    "(´• ω •`)": {
+    "ᕙ(  •̀ ᗜ •́  )ᕗ": {
       "en": [
-        "deer",
-        "cute",
-        "shy"
-      ],
-      "da": [
-        "hjort",
-        "sød",
-        "genert"
-      ]
-    },
-    "ᕦ(ò_óˇ)ᕤ": {
-      "en": [
+        "💪",
+        "got this",
         "strong",
         "determined",
+        "let's go",
         "fight",
         "pumped",
         "spirit",
         "victory"
       ],
       "da": [
+        "💪",
         "stærk",
         "beslutsom",
         "kæmpe",
+        "kom så",
         "fight",
         "kamp",
         "pumpet",
@@ -834,25 +1165,9 @@
         "sejr"
       ]
     },
-    "(╯°□°)╯︵ʞɔɐᴉן∩": {
-      "en": [
-        "tableflip",
-        "flip",
-        "rage",
-        "angry",
-        "frustrated"
-      ],
-      "da": [
-        "tableflip",
-        "flip",
-        "raseri",
-        "rage",
-        "vred",
-        "frustreret"
-      ]
-    },
     "(ノ°▽°)ノ": {
       "en": [
+        "😃",
         "excited",
         "happy",
         "jump",
@@ -860,6 +1175,7 @@
         "woohoo"
       ],
       "da": [
+        "😃",
         "begejstret",
         "glad",
         "hop",
@@ -867,143 +1183,113 @@
         "juhu"
       ]
     },
-    "(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧": {
-      "en": [
-        "magic",
-        "sparkle",
-        "cute",
-        "happy"
-      ],
-      "da": [
-        "magi",
-        "magic",
-        "glitrer",
-        "sød",
-        "glad"
-      ]
-    },
     "(◕‿◕)♡": {
       "en": [
+        "<3",
         "love",
         "happy",
         "sweet"
       ],
       "da": [
+        "<3",
         "kærlighed",
         "glad",
         "sød"
       ]
     },
-    "(｡♥‿♥｡)": {
+    "ಠ_ಠ": {
       "en": [
-        "love",
-        "adorable",
-        "sweet",
-        "love_struck"
-      ],
-      "da": [
-        "kærlighed",
-        "nuttet",
-        "sød",
-        "forelsket"
-      ]
-    },
-    "(◡‿◡)": {
-      "en": [
-        "shy",
-        "cute",
-        "blush"
-      ],
-      "da": [
-        "genert",
-        "sød",
-        "rødme",
-        "rødmer"
-      ]
-    },
-    "(⁄ ⁄>⁄ ▽ ⁄<⁄ ⁄)": {
-      "en": [
-        "blush",
-        "embarrassed",
-        "shy"
-      ],
-      "da": [
-        "rødme",
-        "rødmer",
-        "flov",
-        "genert"
-      ]
-    },
-    "(ᗒᗨᗕ)": {
-      "en": [
-        "embarrassed",
-        "shy",
-        "awkward"
-      ],
-      "da": [
-        "flov",
-        "genert",
-        "akavet"
-      ]
-    },
-    "(▰˘◡˘▰)": {
-      "en": [
-        "loved",
-        "cute",
-        "content"
-      ],
-      "da": [
-        "elsket",
-        "sød",
-        "tilfreds"
-      ]
-    },
-    "(¬_¬)": {
-      "en": [
-        "skeptical",
+        "🤨",
+        "😒",
+        "🙄",
+        "disapproval",
+        "disappointed",
         "judging",
-        "sideeye",
-        "plotting"
+        "right",
+        "sure",
+        "whatever",
+        "hmm",
+        "skeptical"
       ],
       "da": [
-        "skeptisk",
+        "🤨",
+        "😒",
+        "🙄",
+        "misbilligelse",
+        "skuffet",
         "dømmende",
-        "sideeye",
-        "planlægger"
+        "ligemeget",
+        "skeptisk"
       ]
     },
-    "(￣▽￣)": {
+    "(ㆆ_ㆆ)": {
       "en": [
+        "🤨",
+        "😒",
+        "🙄",
+        "disapproval",
+        "disappointed",
+        "judging",
+        "hmm",
+        "right",
+        "sure",
+        "whatever",
+        "skeptical"
+      ],
+      "da": [
+        "🤨",
+        "😒",
+        "🙄",
+        "misbilligelse",
+        "skuffet",
+        "dømmende",
+        "ligemeget",
+        "skeptisk"
+      ]
+    },
+    "(⚆_⚆)": {
+      "en": [
+        "🤨",
+        "🙄",
+        "eyeroll",
+        "skeptical",
+        "unsure",
+        "hmm",
+        "lurking",
+        "spying"
+      ],
+      "da": [
+        "🤨",
+        "🙄",
+        "sideeye",
+        "skeptisk",
+        "usikker",
+        "spionerer"
+      ]
+    },
+    "(˵ ¬ᴗ¬˵)": {
+      "en": [
+        "😏",
+        "😈",
+        "hehe",
         "smug",
         "confident",
         "smirk",
         "cheeky"
       ],
       "da": [
+        "😏",
+        "😈",
         "smug",
         "selvsikker",
-        "smirk",
+        "grin",
         "fræk"
-      ]
-    },
-    "(◔_◔)": {
-      "en": [
-        "sideeye",
-        "skeptical",
-        "unsure",
-        "lurking",
-        "spying"
-      ],
-      "da": [
-        "sideeye",
-        "skeptisk",
-        "usikker",
-        "gemmer_sig",
-        "spionerer"
       ]
     },
     "(─.─||)": {
       "en": [
+        "😑",
+        "😶",
         "speechless",
         "disappointed",
         "facepalm",
@@ -1011,6 +1297,8 @@
         "resigned"
       ],
       "da": [
+        "😑",
+        "😶",
         "målløs",
         "skuffet",
         "facepalm",
@@ -1018,26 +1306,18 @@
         "resigneret"
       ]
     },
-    "＼(〇_ｏ)／": {
-      "en": [
-        "surprise",
-        "shock",
-        "oh no"
-      ],
-      "da": [
-        "overraskelse",
-        "chok",
-        "åh nej"
-      ]
-    },
     "щ(ºДºщ)": {
       "en": [
+        "😱",
         "shock",
+        "what",
         "surprise",
         "no way"
       ],
       "da": [
+        "😱",
         "chok",
+        "hvad",
         "overraskelse",
         "no way"
       ]
@@ -1079,7 +1359,9 @@
       "en": [
         "bored",
         "tired",
-        "unimpressed",
+        "meh",
+        "huh",
+        "oh well",
         "resigned"
       ],
       "da": [
@@ -1089,59 +1371,21 @@
         "resigneret"
       ]
     },
-    "(￣ω￣)": {
+    "(つ╥﹏╥)つ": {
       "en": [
-        "smirk",
-        "satisfied",
-        "content"
-      ],
-      "da": [
-        "smirk",
-        "tilfreds"
-      ]
-    },
-    "(◑‿◐)": {
-      "en": [
-        "wink",
-        "playful",
-        "mischievous",
-        "cheeky",
-        "teehee"
-      ],
-      "da": [
-        "blink",
-        "legesyg",
-        "drillende",
-        "fræk",
-        "teehee"
-      ]
-    },
-    "(づ￣ ³￣)づ": {
-      "en": [
-        "hug",
-        "kiss",
-        "love",
-        "cuddle",
-        "embrace",
-        "snuggle"
-      ],
-      "da": [
-        "kram",
-        "kys",
-        "kærlighed",
-        "putte",
-        "omfavn"
-      ]
-    },
-    "(っ˘̩╭╮˘̩)っ": {
-      "en": [
+        "🫂",
+        "😭",
         "hug",
         "comfort",
         "support",
+        "please",
+        "pls",
         "embrace",
         "snuggle"
       ],
       "da": [
+        "🫂",
+        "😭",
         "kram",
         "trøst",
         "trøster",
@@ -1150,198 +1394,119 @@
         "putte"
       ]
     },
-    "♡〜٩(^▿^)۶〜♡": {
+    "(ノ ･ω･)ノ*:･ﾟ✧": {
       "en": [
-        "love",
-        "celebrate",
+        "🧙",
+        "🪄",
+        "sparkle",
+        "magic",
+        "glitter",
         "happy"
       ],
       "da": [
-        "kærlighed",
-        "fejre",
-        "fejrer",
-        "glad"
-      ]
-    },
-    "✧･ﾟ: *✧･ﾟ:*": {
-      "en": [
-        "sparkle",
-        "magic",
-        "pretty"
-      ],
-      "da": [
-        "glitrer",
-        "magi",
-        "magic",
-        "smuk"
-      ]
-    },
-    "(ノ◕ヮ◕)ノ*:･ﾟ✧": {
-      "en": [
-        "sparkle",
-        "magic",
-        "happy"
-      ],
-      "da": [
+        "🧙",
+        "🪄",
         "glitrer",
         "magi",
         "magic",
         "glad"
       ]
     },
-    "ヽ(｡◕‿◕｡)ﾉ": {
+    "٩( ᐖ )人( ᐛ )و": {
       "en": [
-        "joy",
-        "celebrate",
-        "dance"
+        "👏",
+        "🙏",
+        "🙌",
+        "highfive",
+        "win",
+        "done"
       ],
       "da": [
-        "glæde",
+        "👏",
+        "🙏",
+        "🙌",
+        "highfive",
         "fejre",
         "fejrer",
-        "dans"
+        "vind"
       ]
     },
-    "(^▽^)": {
+    "ꉂ(˵˃ ᗜ ˂˵)": {
       "en": [
+        "😂",
+        "lol",
         "laugh",
-        "happy",
-        "joy"
+        "haha"
       ],
       "da": [
+        "😂",
         "grin",
         "grine",
-        "latter",
-        "glad",
-        "glæde"
-      ]
-    },
-    "╰(▔∀▔)╯": {
-      "en": [
-        "celebrate",
-        "happy",
-        "dance"
-      ],
-      "da": [
-        "fejre",
-        "fejrer",
-        "glad",
-        "dans"
+        "haha"
       ]
     },
     "＼(^o^)／": {
       "en": [
+        "🎉",
+        "🥳",
         "banzai",
         "excited",
         "cheer",
-        "celebrate",
-        "arms_up"
+        "woohoo",
+        "yay",
+        "celebrate"
       ],
       "da": [
+        "🎉",
+        "🥳",
         "banzai",
         "begejstret",
         "juble",
-        "fejre",
-        "arme_op"
-      ]
-    },
-    "\\(^o^)/": {
-      "en": [
-        "banzai",
-        "cheer",
-        "celebrate",
-        "arms_up"
-      ],
-      "da": [
-        "banzai",
-        "juble",
-        "fejre",
-        "arme_op"
+        "hurra",
+        "juhu",
+        "fejre"
       ]
     },
     "＼(＾▽＾)／": {
       "en": [
+        "🎉",
+        "🥳",
         "joy",
         "celebrate",
-        "arms_up",
+        "woohoo",
+        "yay",
         "banzai"
       ],
       "da": [
+        "🎉",
+        "🥳",
         "glæde",
         "fejre",
-        "arme_op",
+        "juhu",
+        "hurra",
         "banzai"
       ]
     },
-    "ヾ(＾∇＾)ﾉ": {
+    "╲(★ω★)╱": {
       "en": [
-        "cheer",
-        "celebrate",
-        "wave",
-        "happy"
-      ],
-      "da": [
-        "juble",
-        "fejre",
-        "vinke",
-        "glad"
-      ]
-    },
-    "ヽ(●´∀｀●)ﾉ": {
-      "en": [
-        "happy",
-        "arms_up",
-        "joy",
-        "excited"
-      ],
-      "da": [
-        "glad",
-        "arme_op",
-        "glæde",
-        "begejstret"
-      ]
-    },
-    "ヽ(>∀<☆)ノ": {
-      "en": [
-        "super_happy",
-        "excited",
-        "sparkle"
-      ],
-      "da": [
-        "superglad",
-        "begejstret",
-        "glitrer"
-      ]
-    },
-    "\\(★ω★)/": {
-      "en": [
+        "🤩",
         "excited",
         "starstruck",
         "awesome"
       ],
       "da": [
+        "🤩",
         "begejstret",
         "stjerneforelsket",
         "fantastisk"
       ]
     },
-    "╰( ⁰ ਊ ⁰ )╯": {
-      "en": [
-        "celebrate",
-        "happy",
-        "excited",
-        "dance"
-      ],
-      "da": [
-        "fejre",
-        "glad",
-        "begejstret",
-        "dans"
-      ]
-    },
     "~(˘▾˘)~": {
       "en": [
+        "wiii",
         "wave",
+        "yeah",
+        "whatever",
         "dance",
         "carefree",
         "happy"
@@ -1349,388 +1514,273 @@
       "da": [
         "vinke",
         "dans",
+        "ligemeget",
         "bekymringsløs",
         "glad"
       ]
     },
     "(；￣Д￣)": {
       "en": [
+        "😓",
         "sweat",
         "nervous",
+        "doh",
         "awkward",
         "embarrassed",
         "phew"
       ],
       "da": [
+        "😓",
         "sved",
         "nervøs",
         "akavet",
+        "øj",
+        "åh nej",
         "flov",
-        "pyha"
+        "pyha",
+        "puha"
       ]
     },
-    "(；´Д｀)": {
+    "₍₍⚞(⸝⸝>⸝⸝<⸝⸝)⚟⁾⁾": {
       "en": [
-        "tired",
-        "exhausted",
-        "struggling",
-        "despair",
-        "helpless",
-        "no_good",
-        "phew"
-      ],
-      "da": [
-        "træt",
-        "udmattet",
-        "kæmper",
-        "fortvivlelse",
-        "hjælpeløs",
-        "no_good",
-        "pyha"
-      ]
-    },
-
-    "(´-ω-`)": {
-      "en": [
-        "tired",
-        "sleepy",
-        "drowsy",
-        "resigned",
-        "bleary",
-        "meh"
-      ],
-      "da": [
-        "træt",
-        "søvnig",
-        "døsig",
-        "resigneret",
-        "sløret",
-        "meh"
-      ]
-    },
-    "(/ω＼)": {
-      "en": [
+        "😳",
         "embarrassed",
         "shy",
         "blush"
       ],
       "da": [
+        "😳",
         "flov",
         "genert",
         "rødme",
         "rødmer"
       ]
     },
-    "(*/ω＼*)": {
+    "┬┴┬┴┤･ω･)": {
       "en": [
-        "embarrassed",
-        "blush",
-        "shy"
-      ],
-      "da": [
-        "flov",
-        "rødme",
-        "rødmer",
-        "genert"
-      ]
-    },
-    "|･ω･)": {
-      "en": [
+        "😶‍🌫️",
+        "🫣",
         "peek",
         "hiding",
         "shy",
+        "hey",
         "lurking",
         "spying"
       ],
       "da": [
+        "😶‍🌫️",
+        "🫣",
         "peek",
         "titter",
         "kigger",
-        "gemmer sig",
+        "hej",
+        "gemmeleg",
         "genert",
-        "gemmer_sig",
-        "spionerer"
+        "spion"
       ]
     },
     "ヾ(･ω･*)": {
       "en": [
+        "🌊",
+        "👋",
+        "hey",
+        "hi",
+        "hello",
         "bye",
         "wave",
         "goodbye"
       ],
       "da": [
+        "🌊",
+        "👋",
+        "hejsa",
+        "hej",
         "farvel",
         "vinke",
         "vinker"
       ]
     },
-    "(*￣▽￣)ﾉ": {
-      "en": [
-        "wave",
-        "hello",
-        "bye"
-      ],
-      "da": [
-        "vinke",
-        "vinker",
-        "hallo",
-        "hej",
-        "hello",
-        "farvel"
-      ]
-    },
     "ヽ(^o^)丿": {
       "en": [
+        "🌊",
+        "👋",
         "joy",
         "cheer",
         "wave",
         "hello",
-        "arms_up"
+        "hey",
+        "arms up"
       ],
       "da": [
+        "🌊",
+        "👋",
         "glæde",
         "juble",
         "vinke",
         "hej",
-        "arme_op"
+        "arme op"
       ]
     },
     "(ﾉ´ｰ`)ﾉ": {
       "en": [
-        "wave",
         "carefree",
-        "laissez_faire",
-        "bye"
+        "meh",
+        "whatever",
+        "anyway"
       ],
       "da": [
         "vinke",
         "bekymringsløs",
-        "ligeglad",
-        "farvel"
+        "pyt",
+        "ligeglad"
       ]
     },
-    "(-_-)ゞ": {
+    "◕⩊◕": {
       "en": [
-        "apologetic",
-        "sorry",
-        "embarrassed",
-        "sheepish",
-        "cheeky",
-        "teehee",
-        "bow",
-        "apologize"
-      ],
-      "da": [
-        "undskyldende",
-        "sorry",
-        "undskyld",
-        "flov",
-        "fåret",
-        "sheepish",
-        "fræk",
-        "teehee",
-        "bukke",
-        "undskylde"
-      ]
-    },
-    "(◔‿◔)": {
-      "en": [
+        "👀",
+        "hehe",
+        "hey",
         "interested",
         "curious",
         "playful",
         "wink"
       ],
       "da": [
+        "👀",
+        "hehe",
+        "hejsa",
         "interesseret",
         "nysgerrig",
         "legesyg",
         "blink"
       ]
     },
-    "٩(｡•́‿•̀｡)۶": {
-      "en": [
-        "excited",
-        "happy",
-        "cute"
-      ],
-      "da": [
-        "begejstret",
-        "glad",
-        "sød"
-      ]
-    },
-    "(*^‿^*)": {
-      "en": [
-        "happy",
-        "smile",
-        "cute"
-      ],
-      "da": [
-        "glad",
-        "smile",
-        "smil",
-        "sød"
-      ]
-    },
     "(✧ω✧)": {
       "en": [
+        "🤩",
         "sparkle",
         "excited",
         "amazed",
+        "wow",
         "starstruck",
         "awesome"
       ],
       "da": [
+        "🤩",
         "glitrer",
         "begejstret",
         "forbløffet",
+        "wow",
+        "jah",
         "stjerneforelsket",
         "fantastisk"
-      ]
-    },
-    "＜（＾－＾）＞": {
-      "en": [
-        "smile",
-        "happy",
-        "friendly"
-      ],
-      "da": [
-        "smile",
-        "smil",
-        "glad",
-        "venlig"
       ]
     },
     "(´｡• ᵕ •｡`)": {
       "en": [
         "cute",
+        "aw",
         "adorable",
         "sweet"
       ],
       "da": [
         "sød",
+        "åh",
         "nuttet"
-      ]
-    },
-    "(≧▽≦)": {
-      "en": [
-        "excited",
-        "happy",
-        "overjoyed",
-        "thrilled",
-        "squee"
-      ],
-      "da": [
-        "begejstret",
-        "glad",
-        "overlykkelig",
-        "henrykt",
-        "jubel"
-      ]
-    },
-    "(*´▽`*)": {
-      "en": [
-        "happy",
-        "blush",
-        "delighted",
-        "lovestruck",
-        "euphoric"
-      ],
-      "da": [
-        "glad",
-        "rødme",
-        "henrykt",
-        "forelsket",
-        "euforisk"
       ]
     },
     "(˶ᵔ ᵕ ᵔ˶)": {
       "en": [
         "cute",
         "happy",
-        "soft_smile",
+        "blush",
         "content"
       ],
       "da": [
         "sød",
         "glad",
-        "blødt_smil",
+        "rødme",
         "tilfreds"
       ]
     },
     "o(≧▽≦)o": {
       "en": [
-        "super_happy",
+        "happy",
+        "omg",
+        "woohoo",
+        "squee",
+        "yesss",
         "squeal",
         "excited",
         "joy"
       ],
       "da": [
         "superglad",
+        "omg",
+        "juhu",
+        "jubi",
+        "hurra",
         "hvin",
         "begejstret",
         "glæde"
       ]
     },
-    "(⊃｡•́‿•̀｡)⊃": {
-      "en": [
-        "embrace",
-        "hug",
-        "comfort",
-        "snuggle"
-      ],
-      "da": [
-        "omfavn",
-        "kram",
-        "trøst",
-        "putte"
-      ]
-    },
-    "⊂(◉‿◉)つ": {
-      "en": [
-        "grab",
-        "hug",
-        "embrace",
-        "gimme"
-      ],
-      "da": [
-        "tag",
-        "kram",
-        "omfavn",
-        "giv_mig"
-      ]
-    },
     "(´｡• ᵕ •｡`)×": {
       "en": [
-        "cute_blush",
+        "😊",
+        "blush",
+        "aw",
         "adoring",
-        "love_struck"
+        "love"
       ],
       "da": [
+        "😊",
         "sød",
         "rødme",
         "tilbedende",
         "forelsket"
       ]
     },
-    "orz": {
+    "∘ ∘ ∘ ( °ヮ° ) ?": {
       "en": [
-        "despair",
-        "defeat",
-        "sorry",
-        "begging",
-        "face_down"
+        "⁉️",
+        "???",
+        "confused",
+        "what",
+        "tf",
+        "wtf",
+        "huh"
       ],
       "da": [
-        "fortvivlelse",
-        "nederlag",
-        "undskyld",
-        "tigger",
-        "ansigt_ned"
+        "⁉️",
+        "???",
+        "forvirret",
+        "hvad",
+        "wtf",
+        "huh"
+      ]
+    },
+    "(≖_≖ 𖡎)": {
+      "en": [
+        "🧠",
+        "???",
+        "confused",
+        "what",
+        "brain",
+        "huh"
+      ],
+      "da": [
+        "🧠",
+        "???",
+        "forvirret",
+        "hvad",
+        "hjerne",
+        "huh"
       ]
     },
     "m(_ _)m": {
       "en": [
+        "🙇",
         "bow",
         "apologize",
         "respect",
@@ -1738,6 +1788,7 @@
         "humble"
       ],
       "da": [
+        "🙇",
         "bukke",
         "undskylde",
         "respekt",
@@ -1745,30 +1796,18 @@
         "ydmyg"
       ]
     },
-    "♡( ◡‿◡ )": {
-      "en": [
-        "love",
-        "cute",
-        "blush",
-        "shy"
-      ],
-      "da": [
-        "kærlighed",
-        "sød",
-        "rødme",
-        "rødmer",
-        "genert"
-      ]
-    },
     "(◎_◎;)": {
       "en": [
+        "😵‍💫",
         "surprised",
         "shocked",
+        "shock",
         "confused",
         "dazed",
         "gasp"
       ],
       "da": [
+        "😵‍💫",
         "overrasket",
         "chokeret",
         "forvirret",
@@ -1776,170 +1815,137 @@
         "gisp"
       ]
     },
-    "∑(ﾟДﾟ)": {
-      "en": [
-        "shocked",
-        "surprised",
-        "stunned",
-        "gasp",
-        "what"
-      ],
-      "da": [
-        "chokeret",
-        "overrasket",
-        "lamslået",
-        "gisp",
-        "hvad"
-      ]
-    },
     "(　ﾟДﾟ)": {
       "en": [
+        "😮",
+        "😱",
+        "🫨",
         "shocked",
         "speechless",
+        "wtf",
         "stunned"
       ],
       "da": [
+        "😮",
+        "😱",
+        "🫨",
         "chokeret",
         "målløs",
+        "wtf",
         "lamslået"
       ]
     },
-    "(´⊙ω⊙`)": {
+    "( ´･･)ﾉ(._.`)": {
       "en": [
-        "shocked",
-        "confused",
-        "ow",
-        "dazed"
+        "patpat",
+        "there"
       ],
       "da": [
-        "chokeret",
-        "forvirret",
-        "av",
-        "svimmel"
+        "patpat",
+        "træls"
       ]
     },
-    "┐(￣ヘ￣)┌": {
+    "¯╲_(ᵕ—ᴗ—)_╱¯": {
       "en": [
+        "🤷",
+        "😅",
+        "beats me",
         "dunno",
         "whatever",
         "clueless",
         "helpless",
+        "'kay",
+        "okay",
+        "sure",
         "shrug",
         "shrugging"
       ],
       "da": [
-        "vedikke",
+        "🤷",
+        "😅",
+        "ved ikke",
         "ligemeget",
         "anelsesløs",
         "hjælpeløs",
+        "pyt",
         "shrug",
         "shrugging"
       ]
     },
-    "(ﾟ∀ﾟ)": {
+    "(>﹏<)": {
       "en": [
-        "crazy",
-        "amazed",
-        "wild",
-        "excited",
-        "manic"
-      ],
-      "da": [
-        "skør",
-        "forbløffet",
-        "vild",
-        "begejstret",
-        "vanvittig"
-      ]
-    },
-    "(＞﹏＜)": {
-      "en": [
+        "😖",
+        "please",
+        "pls",
         "struggling",
-        "cute",
         "pleading",
         "sorry",
         "begging",
         "helpless",
-        "no_good"
+        "oof",
+        "phew"
       ],
       "da": [
+        "😖",
         "kæmper",
-        "sød",
         "bedende",
         "sorry",
         "undskyld",
         "tigger",
         "hjælpeløs",
-        "no_good"
-      ]
-    },
-    "(´；ω；`)": {
-      "en": [
-        "cry",
-        "sob",
-        "pitiful",
-        "tragic",
-        "weeping"
-      ],
-      "da": [
-        "gråd",
-        "hulk",
-        "sørgelig",
-        "tragisk",
-        "græder"
+        "uf",
+        "puha",
+        "pyha"
       ]
     },
     "(;´Д`)": {
       "en": [
+        "😰",
         "struggling",
         "despair",
         "exhausted",
-        "no_good"
+        "oof",
+        "ugh"
       ],
       "da": [
+        "😰",
         "kæmper",
         "fortvivlelse",
         "udmattet",
-        "no_good"
+        "træt",
+        "ugh"
       ]
     },
-    "_(:3」∠)_": {
+    "( ꩜ ᯅ ꩜;)⁭⁭": {
       "en": [
+        "😵‍💫",
         "lazy",
         "tired",
         "dead",
         "sleepy",
         "despair",
+        "oof",
+        "ugh",
         "drowsy"
       ],
       "da": [
+        "😵‍💫",
         "doven",
         "træt",
         "død",
         "søvnig",
         "fortvivlelse",
+        "føj",
+        "puha",
+        "pyha",
         "døsig"
-      ]
-    },
-    "(◞‸◟)": {
-      "en": [
-        "sad",
-        "lonely",
-        "depressed",
-        "cry",
-        "despair"
-      ],
-      "da": [
-        "trist",
-        "ensom",
-        "deprimeret",
-        "depri",
-        "gråd",
-        "fortvivlelse"
       ]
     },
     "(；▽；)": {
       "en": [
+        "🥹",
+        "🥲",
+        ":_)",
         "cry",
         "tears",
         "moved",
@@ -1948,6 +1954,9 @@
         "weeping"
       ],
       "da": [
+        "🥹",
+        "🥲",
+        ":_)",
         "gråd",
         "tårer",
         "rørt",
@@ -1956,77 +1965,147 @@
         "græder"
       ]
     },
-    "(๑•́ㅿ•̀๑)": {
-      "en": [
-        "shy",
-        "embarrassed",
-        "cute",
-        "blush"
-      ],
-      "da": [
-        "genert",
-        "flov",
-        "sød",
-        "rødme",
-        "rødmer"
-      ]
-    },
     "(ᗒᗩᗕ)": {
       "en": [
+        "😖",
         "embarrassed",
         "shy",
         "cute",
+        "oof",
+        "doh",
+        "oops",
         "flustered"
       ],
       "da": [
         "flov",
         "genert",
         "sød",
+        "uf",
         "forvirret"
       ]
     },
-    "(^^ゞ": {
+    "(˶˃⤙˂˶)": {
       "en": [
+        "😳",
+        "😖",
         "shy",
-        "scratching_head",
+        "doh",
+        "humph",
+        "sure",
+        "oops",
         "embarrassed",
-        "sheepish"
+        "sheepish",
+        "sorry"
       ],
       "da": [
+        "😳",
+        "😖",
         "genert",
-        "kradser_hoved",
+        "åh nej",
+        "hm",
+        "uf",
         "flov",
-        "fåret"
+        "fåret",
+        "undskyld"
       ]
     },
-    "(´∇ﾉ｀*)ノ": {
+    "(⌐■_■)": {
       "en": [
-        "teehee",
-        "playful",
-        "shy",
-        "cheeky",
-        "hide"
+        "🤓",
+        "nerd",
+        "geek",
+        "cool",
+        "glasses",
+        "gotcha"
       ],
       "da": [
-        "teehee",
-        "legesyg",
-        "genert",
-        "fræk",
-        "gemmer"
+        "🤓",
+        "nørd",
+        "fedt",
+        "briller",
+        "forstået"
       ]
     },
-    "(　･ω･)": {
+    "(°□°) ☝️": {
       "en": [
+        "acktually",
+        "actually",
+        "wait"
+      ],
+      "da": [
+        "acktually",
+        "faktisk",
+        "vent"
+      ]
+    },
+    "(っ´ཀ`)っ": {
+      "en": [
+        "hungry",
+        "food",
+        "breakfsat",
+        "brunch",
+        "lunch",
+        "dinner",
+        "eat"
+      ],
+      "da": [
+        "sulten",
+        "mad",
+        "morgenmad",
+        "brunch",
+        "frokost",
+        "aftensmad",
+        "spise"
+      ]
+    },
+    "(っ-⸲-)つ°🍵⋆.ೃ࿔*:･": {
+      "en": [
+        "🍵",
+        "tea",
+        "matcha",
+        "good morning"
+      ],
+      "da": [
+        "🍵",
+        "te",
+        "matcha",
+        "godmorgen"
+      ]
+    },
+    "(っᵔ◡ᵔ)っ☕︎": {
+      "en": [
+        "☕",
+        "tea",
+        "coffee",
+        "good morning",
+        "wait"
+      ],
+      "da": [
+        "☕",
+        "te",
+        "kaffe",
+        "godmorgen"
+      ]
+    },
+    "(╭ರ_•́)": {
+      "en": [
+        "🧐",
         "peeking",
-        "shy",
+        "monocle",
         "lurking",
-        "spying"
+        "hmm",
+        "what",
+        "whut",
+        "maybe",
+        "spy"
       ],
       "da": [
+        "🧐",
         "titter",
-        "genert",
-        "gemmer_sig",
-        "spionerer"
+        "monokel",
+        "hvad",
+        "måske",
+        "spion"
       ]
     }
   }
