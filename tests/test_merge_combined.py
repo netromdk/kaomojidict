@@ -238,6 +238,15 @@ def test_main_merge_combined_missing_file(tmp_path):
      "en", True, ["tableflip", "rage", "bordvæltning", "raseri"]),
     ({"(◕‿◕)": {"en": ["happy"]}},
      "da", False, []),
+    # wildcard * tags
+    ({"(◕‿◕)": {"*": ["😄", ":D"], "en": ["happy", "cute"], "da": ["glad", "sød"]}},
+     "en", False, ["😄", ":D", "happy", "cute"]),
+    ({"(◕‿◕)": {"*": ["😄", ":D"], "en": ["happy", "cute"], "da": ["glad", "sød"]}},
+     "da", False, ["😄", ":D", "glad", "sød"]),
+    ({"(◕‿◕)": {"*": ["😄", ":D"], "en": ["happy", "cute"], "da": ["glad", "sød"]}},
+     "en", True, ["😄", ":D", "happy", "cute", "glad", "sød"]),
+    ({"(◕‿◕)": {"*": ["😄", ":D"], "en": ["happy"]}},
+     "da", False, ["😄", ":D"]),
 ])
 def test_extract_tags(kaomoji, locale, all_locales, expected):
   result = bkd._extract_tags(kaomoji, locale=locale, all_locales=all_locales)

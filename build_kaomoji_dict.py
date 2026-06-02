@@ -10,7 +10,7 @@ Input JSON format:
     "description": "Kaomoji dictionary",
     "version": 1,
     "kaomoji": {
-      "¯\\_(ツ)_/¯": ["shrug", "shrugging"],
+      "¯╲_(ツ)_╱¯": ["shrug", "shrugging"],
       "(╯°□°)╯︵┻━┻": ["tableflip", "rage"]
     }
   }
@@ -140,19 +140,24 @@ def _extract_tags(
   locale: str | None = None,
   all_locales: bool = False,
 ) -> dict[str, list[str]]:
-  """Flatten per-locale tags or pass through flat lists."""
+  """Flatten per-locale tags or pass through flat lists.
+
+  A special "*" key provides tags common to all locales.
+  """
   result: dict[str, list[str]] = {}
   for kaomoji, tags in kaomoji_map.items():
     if isinstance(tags, dict):
+      common = tags.get("*", [])
       if all_locales:
-        merged: list[str] = []
-        for loc_tags in tags.values():
-          merged.extend(loc_tags)
+        merged: list[str] = list(common)
+        for loc, loc_tags in tags.items():
+          if loc != "*":
+            merged.extend(loc_tags)
         result[kaomoji] = merged
       elif locale is not None and locale in tags:
-        result[kaomoji] = tags[locale]
+        result[kaomoji] = common + tags[locale]
       else:
-        result[kaomoji] = []
+        result[kaomoji] = common
     else:
       result[kaomoji] = tags
   return result

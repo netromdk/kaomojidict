@@ -1,7 +1,7 @@
 # Kaomoji dictionaries for HeliBoard and AOSP keyboards
 
 Kaomoji (顔文字) are Japanese-style emoticons built from text characters,
-e.g. `¯\\_(ツ)_/¯` or `(╯°□°)╯︵┻━┻`. [Wikipedia](https://en.wikipedia.org/wiki/Kaomoji)
+e.g. `¯╲_(ツ)_╱¯` or `(╯°□°)╯︵┻━┻`. [Wikipedia](https://en.wikipedia.org/wiki/Kaomoji)
 
 ## Build
 
@@ -40,12 +40,16 @@ A single `kaomoji.json` contains all locales with per-locale tags and descriptio
       "da": ["glad", "sød"]
     },
     "(╯°□°)╯︵┻━┻": {
+      "*": ["flip"],
       "en": ["tableflip", "rage"],
       "da": ["bordvæltning", "raseri"]
     }
   }
 }
 ```
+
+A special `"*"` locale adds tags shared by all locales. These are prepended
+before each locale's specific tags.
 
 Build one locale at a time:
 
