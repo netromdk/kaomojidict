@@ -238,8 +238,12 @@ def main() -> None:
     args.input = str(SCRIPT_DIR / DEFAULT_INPUT)
     print(f"Using default kaomoji set ({args.input})", file=sys.stderr)
 
-  with open(args.input, encoding="utf-8") as f:
-    data = json.load(f)
+  try:
+    with open(args.input, encoding="utf-8") as f:
+      data = json.load(f)
+  except json.JSONDecodeError as e:
+    print(f"error: invalid JSON in {args.input}: {e}", file=sys.stderr)
+    sys.exit(1)
   kaomoji_map = data.get("kaomoji")
   if not isinstance(kaomoji_map, dict):
     print("error: input JSON must contain a 'kaomoji' object", file=sys.stderr)
