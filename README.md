@@ -49,7 +49,7 @@ A single `kaomoji.json` contains all locales with per-locale tags and descriptio
 ```
 
 A special `"*"` locale adds tags shared by all locales. These are prepended
-before each locale's specific tags.
+before each locale's specific tags. Use `--no-star-locale` to exclude them.
 
 Build one locale at a time:
 

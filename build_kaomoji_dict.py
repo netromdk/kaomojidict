@@ -139,15 +139,17 @@ def _extract_tags(
   kaomoji_map: dict[str, list[str] | dict[str, list[str]]],
   locale: str | None = None,
   all_locales: bool = False,
+  no_star: bool = False,
 ) -> dict[str, list[str]]:
   """Flatten per-locale tags or pass through flat lists.
 
   A special "*" key provides tags common to all locales.
+  Pass no_star=True to exclude "*" tags.
   """
   result: dict[str, list[str]] = {}
   for kaomoji, tags in kaomoji_map.items():
     if isinstance(tags, dict):
-      common = tags.get("*", [])
+      common = [] if no_star else tags.get("*", [])
       if all_locales:
         merged: list[str] = list(common)
         for loc, loc_tags in tags.items():
@@ -221,6 +223,10 @@ def main() -> None:
     help="Include tags from all locales (not just the selected one)",
   )
   parser.add_argument(
+    "--no-star-locale", action="store_true",
+    help="Exclude tags from the '*' shared locale",
+  )
+  parser.add_argument(
     "-v", "--verbose", action="store_true",
     help="Print the full combined wordlist",
   )
@@ -276,7 +282,8 @@ def main() -> None:
   else:
     description = desc_raw
 
-  kaomoji_flat = _extract_tags(kaomoji_map, locale, args.all_locales)
+  kaomoji_flat = _extract_tags(kaomoji_map, locale, args.all_locales,
+                               no_star=args.no_star_locale)
 
   if args.merge_combined:
     combined_path = Path(args.merge_combined)

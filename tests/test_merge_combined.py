@@ -253,6 +253,17 @@ def test_extract_tags(kaomoji, locale, all_locales, expected):
   assert sorted(result[list(kaomoji.keys())[0]]) == sorted(expected)
 
 
+@pytest.mark.parametrize("kaomoji,locale,all_locales,expected", [
+    ({"(◕‿◕)": {"*": ["😄"], "en": ["happy", "cute"]}},
+     "en", False, ["happy", "cute"]),
+    ({"(◕‿◕)": {"*": ["😄"], "en": ["happy", "cute"]}},
+     "en", True, ["happy", "cute"]),
+])
+def test_extract_tags_no_star(kaomoji, locale, all_locales, expected):
+  result = bkd._extract_tags(kaomoji, locale=locale, all_locales=all_locales, no_star=True)
+  assert sorted(result[list(kaomoji.keys())[0]]) == sorted(expected)
+
+
 def test_main_all_locales(tmp_path):
   combined_file = tmp_path / "emoji_en.combined"
   combined_file.write_text(EN_COMBINED, encoding="utf-8")
