@@ -182,6 +182,45 @@ def compile_dict(combined_content: str, output_path: str, jar_path: str) -> None
     Path(combined_path).unlink(missing_ok=True)
 
 
+def _sanitize_input(
+  kaomoji_map: dict[str, list[str] | dict[str, list[str]]],
+) -> dict[str, list[str] | dict[str, list[str]]]:
+  for kaomoji in kaomoji_map:
+    locales = kaomoji_map[kaomoji]
+
+    if isinstance(locales, list):
+      kaomoji_map[kaomoji] = sorted({t.lower() for t in locales})
+      continue
+
+    if not isinstance(locales, dict):
+      continue
+
+    locale_sets = {
+      loc: {t.lower() for t in tags} for loc, tags in locales.items() if loc != "*"
+    }
+    if not locale_sets:
+      continue
+
+    existing = {t.lower() for t in locales.get("*", [])}
+    if len(locale_sets) > 1:
+      shared = set.intersection(*locale_sets.values())
+    else:
+      shared = set()
+
+    star = existing | shared
+    if not star:
+      continue
+
+    ordered: dict[str, list[str]] = {"*": sorted(star)}
+    for loc in locales:
+      if loc == "*":
+        continue
+      ordered[loc] = sorted(locale_sets[loc] - star)
+    kaomoji_map[kaomoji] = ordered
+
+  return kaomoji_map
+
+
 def main() -> None:
   parser = argparse.ArgumentParser(description="Build kaomoji dictionary for HeliBoard")
   parser.add_argument("input", nargs="?", help="Input JSON file with kaomoji data")
@@ -227,6 +266,10 @@ def main() -> None:
     help="Exclude tags from the '*' shared locale",
   )
   parser.add_argument(
+    "--sanitize-input", action="store_true",
+    help="Lowercase tags, remove duplicates, promote tags shared by all locales to '*', and exit",
+  )
+  parser.add_argument(
     "-v", "--verbose", action="store_true",
     help="Print the full combined wordlist",
   )
@@ -259,9 +302,23 @@ def main() -> None:
   if not isinstance(kaomoji_map, dict):
     print("error: input JSON must contain a 'kaomoji' object", file=sys.stderr)
     sys.exit(1)
+
+  if args.sanitize_input:
+    print("Sanitizing input..")
+    data["kaomoji"] = _sanitize_input(kaomoji_map)
+    print("Saving modified input file..")
+    try:
+      with open(args.input, mode="w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2, ensure_ascii=False)
+    except Exception as ex:
+      print(f"error: failed to write star locales: {ex}", file=sys.stderr)
+      sys.exit(1)
+    sys.exit(0)
+
   locale = args.locale if args.locale is not None else (
     data.get("locale") or data.get("locales", ["en"])[0]
   )
+
   if args.output is None:
     suffix = ""
     if args.all_locales:
@@ -269,6 +326,7 @@ def main() -> None:
     if args.merge_combined:
       suffix += "_combined"
     args.output = f"kaomoji_{locale}{suffix}.dict"
+
   version = data.get("version", args.version)
   if not isinstance(version, int) or version < 1:
     version = 1

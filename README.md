@@ -74,6 +74,60 @@ increment the version in the JSON file after building:
 ./build_kaomoji_dict.py kaomoji.json --locale en --bump
 ```
 
+Use `--sanitize-input` to clean up the input JSON: lowercase all tags, remove
+duplicates, and promote tags that appear in every locale to the shared `"*"`
+locale:
+
+```sh
+./build_kaomoji_dict.py kaomoji.json --sanitize-input
+```
+
+The input file is modified in place. The process lowercases all tags, removes
+duplicates (within each locale and across locales), and promotes tags shared by
+all locales to `"*"`.
+
+Before:
+
+```json
+{
+  "(◕‿◕)": {
+    "*": ["SMILE"],
+    "en": ["Happy", "Cute", "cute"],
+    "da": ["happy", "GLAD"]
+  },
+  "¯\\_(ツ)_/¯": ["SHRUG", "shrug", "SHRUG"]
+}
+```
+
+After:
+
+```json
+{
+  "(◕‿◕)": {
+    "*": ["happy", "smile"],
+    "en": ["cute"],
+    "da": ["glad"]
+  },
+  "¯\\_(ツ)_/¯": ["shrug"]
+}
+```
+
+All changes visible here:
+
+- **Lowercased**:
+  - `"Happy"` becomes `"happy"`
+  - `"Cute"`/`"cute"` becomes `"cute"`
+  - `"GLAD"` becomes `"glad"`
+  - `"SMILE"` becomes `"smile"`
+- **Deduplicated**: `["Happy", "Cute", "cute"]` collapsed to `{"happy", "cute"}`,
+  so only `"cute"` remains
+- **Star promotion**: `"happy"` appears in both `en` and `da` so it is moved to `"*"`
+- **Star preserved**: existing `"SMILE"` in `"*"` kept as `"smile"`, and
+  `"smile"` is matched case-insensitively against locale tags
+- **Star moved first**: the `"*"` locale is always placed first in the output
+- **Flat entry handled**: `["SHRUG", "shrug", "SHRUG"]` lowercased and deduped
+  to `["shrug"]`
+
 ## Merge with upstream emoji dictionaries
 
 To get Kaomoji suggestions alongside the official upstream emoji entries,
