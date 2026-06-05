@@ -92,10 +92,11 @@ Before:
 {
   "(◕‿◕)": {
     "*": ["SMILE"],
-    "en": ["Happy", "Cute", "cute"],
-    "da": ["happy", "GLAD"]
+    "en": ["Happy!", "Cute", "cute"],
+    "da": ["happy", "GLAD"],
+    "es": ["¿Sonrisa?", "happy"]
   },
-  "¯\\_(ツ)_/¯": ["SHRUG", "shrug", "SHRUG"]
+  "¯╲_(ツ)_╱¯": ["SHRUG!", "shrug", "SHRUG"]
 }
 ```
 
@@ -106,27 +107,32 @@ After:
   "(◕‿◕)": {
     "*": ["happy", "smile"],
     "en": ["cute"],
-    "da": ["glad"]
+    "da": ["glad"],
+    "es": ["sonrisa"]
   },
-  "¯\\_(ツ)_/¯": ["shrug"]
+  "¯╲_(ツ)_╱¯": ["shrug"]
 }
 ```
 
 All changes visible here:
 
 - **Lowercased**:
-  - `"Happy"` becomes `"happy"`
+  - `"Happy!"` becomes `"happy"`
   - `"Cute"`/`"cute"` becomes `"cute"`
   - `"GLAD"` becomes `"glad"`
   - `"SMILE"` becomes `"smile"`
-- **Deduplicated**: `["Happy", "Cute", "cute"]` collapsed to `{"happy", "cute"}`,
+  - `"SHRUG!"` becomes `"shrug"`
+  - `"¿Sonrisa?"` becomes `"sonrisa"`
+- **Deduplicated**: `["Happy!", "Cute", "cute"]` collapsed to `{"cute", "happy"}`,
   so only `"cute"` remains
-- **Star promotion**: `"happy"` appears in both `en` and `da` so it is moved to `"*"`
-- **Star preserved**: existing `"SMILE"` in `"*"` kept as `"smile"`, and
-  `"smile"` is matched case-insensitively against locale tags
+- **Star promotion**: `"happy"` appears in `en`, `da`, and `es` so it is moved to `"*"`
+- **Star preserved**: existing `"SMILE"` in `"*"` kept as `"smile"`
 - **Star moved first**: the `"*"` locale is always placed first in the output
-- **Flat entry handled**: `["SHRUG", "shrug", "SHRUG"]` lowercased and deduped
-  to `["shrug"]`
+- **Flat entry handled**: `["SHRUG!", "shrug", "SHRUG"]` lowercased,
+  punctuation-stripped, and deduped
+- **Punctuation & whitespace stripped**: `"Happy!"` becomes `"happy"` (exclamation
+  removed), `"¿Sonrisa?"` becomes `"sonrisa"` (inverted `¿` and `?` removed),
+  `"SHRUG!"` becomes `"shrug"` (exclamation removed)
 
 ## Merge with upstream emoji dictionaries
 

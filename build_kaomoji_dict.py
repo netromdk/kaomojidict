@@ -22,6 +22,8 @@ If no input file is given, kaomoji_en.json is used as the default.
 import argparse
 import json
 import shutil
+import string
+import unicodedata
 import subprocess  # nosec B404
 import sys
 import tempfile
@@ -182,6 +184,27 @@ def compile_dict(combined_content: str, output_path: str, jar_path: str) -> None
     Path(combined_path).unlink(missing_ok=True)
 
 
+def _sanitize_tag(t: str) -> str:
+  r"""Lowercase and remove punctuation and whitespace.
+
+  Strips:
+  - ASCII punctuation: ! " # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~
+  - ASCII whitespace
+  - Unicode punctuation (category P*)
+  - Unicode separators (category Z*), which includes all Unicode whitespace beyond ASCII
+  """
+  ascii_block = string.punctuation + string.whitespace
+  result: list[str] = []
+  for c in t.lower():
+    if c in ascii_block:
+      continue
+    cat = unicodedata.category(c)
+    if cat.startswith("P") or cat.startswith("Z"):
+      continue
+    result.append(c)
+  return "".join(result)
+
+
 def _sanitize_input(
   kaomoji_map: dict[str, list[str] | dict[str, list[str]]],
 ) -> dict[str, list[str] | dict[str, list[str]]]:
@@ -189,19 +212,101 @@ def _sanitize_input(
     locales = kaomoji_map[kaomoji]
 
     if isinstance(locales, list):
-      kaomoji_map[kaomoji] = sorted({t.lower() for t in locales})
+      tag_map: dict[str, list[str]] = {}
+      for t in locales:
+        if not isinstance(t, str):
+          print(f'  WARNING: Non-string tag {repr(t)} for {kaomoji} ignored.')
+          continue
+        s = _sanitize_tag(t)
+        if not s:
+          print(f'  WARNING: Tag "{t}" for {kaomoji} became empty after sanitization.')
+          continue
+        tag_map.setdefault(s, []).append(t)
+
+      for s, sources in tag_map.items():
+        if len(sources) > 1:
+          print(f'  WARNING: Tags {sources} for {kaomoji} all collapse to "{s}"')
+
+      if not tag_map:
+        print(
+          f"  WARNING: All tags for {kaomoji} were empty after sanitization. "
+          "Entry left as empty list, add new tags.",
+        )
+      kaomoji_map[kaomoji] = sorted(tag_map.keys())
       continue
 
     if not isinstance(locales, dict):
+      print(
+        f"  WARNING: Entry for {kaomoji} is neither a list nor a dict "
+        f"(got {type(locales).__name__}), replacing with [].",
+      )
+      kaomoji_map[kaomoji] = []
       continue
 
-    locale_sets = {
-      loc: {t.lower() for t in tags} for loc, tags in locales.items() if loc != "*"
-    }
-    if not locale_sets:
+    locale_sets: dict[str, set[str]] = {}
+    for loc, tags in locales.items():
+      if loc == "*":
+        continue
+      if not isinstance(tags, list):
+        print(
+          f"  WARNING: Value for {kaomoji} ({loc}) is not a list "
+          f"(got {type(tags).__name__}), skipping.",
+        )
+        locale_sets[loc] = set()
+        continue
+      tag_map_loc: dict[str, list[str]] = {}
+      for t in tags:
+        if not isinstance(t, str):
+          print(f'  WARNING: Non-string tag {repr(t)} for {kaomoji} ({loc}) ignored.')
+          continue
+        s = _sanitize_tag(t)
+        if not s:
+          print(f'  WARNING: Tag "{t}" for {kaomoji} ({loc}) became empty after sanitization.')
+          continue
+        tag_map_loc.setdefault(s, []).append(t)
+
+      for s, sources in tag_map_loc.items():
+        if len(sources) > 1:
+          print(f'  WARNING: Tags {sources} for {kaomoji} ({loc}) all collapse to "{s}"')
+
+      locale_sets[loc] = set(tag_map_loc.keys())
+
+    tag_map_star: dict[str, list[str]] = {}
+    star_raw = locales.get("*")
+    if not isinstance(star_raw, list):
+      if star_raw is not None:
+        print(
+          f"  WARNING: Star value for {kaomoji} is not a list "
+          f"(got {type(star_raw).__name__}), skipping.",
+        )
+      star_raw = []
+    for t in star_raw:
+      if not isinstance(t, str):
+        print(f'  WARNING: Non-string tag {repr(t)} for {kaomoji} (*) ignored.')
+        continue
+      s = _sanitize_tag(t)
+      if not s:
+        print(f'  WARNING: Tag "{t}" for {kaomoji} (*) became empty after sanitization.')
+        continue
+      tag_map_star.setdefault(s, []).append(t)
+
+    for s, sources in tag_map_star.items():
+      if len(sources) > 1:
+        print(f'  WARNING: Tags {sources} for {kaomoji} (*) all collapse to "{s}"')
+
+    existing = set(tag_map_star.keys())
+
+    if not locale_sets and not existing:
       continue
 
-    existing = {t.lower() for t in locales.get("*", [])}
+    if not existing and all(not v for v in locale_sets.values()):
+      print(
+        f"  WARNING: All tags for {kaomoji} were empty after sanitization. "
+        "Entry left with empty locale lists, add new tags.",
+      )
+      kaomoji_map[kaomoji] = {loc: [] for loc in locales}
+      continue
+
     if len(locale_sets) > 1:
       shared = set.intersection(*locale_sets.values())
     else:
@@ -209,13 +314,21 @@ def _sanitize_input(
 
     star = existing | shared
     if not star:
+      if all(not v for v in locale_sets.values()):
+        continue
+      entry: dict[str, list[str]] = {}
+      for loc in locales:
+        if loc == "*":
+          continue
+        entry[loc] = sorted(locale_sets.get(loc, set()))
+      kaomoji_map[kaomoji] = entry
       continue
 
     ordered: dict[str, list[str]] = {"*": sorted(star)}
     for loc in locales:
       if loc == "*":
         continue
-      ordered[loc] = sorted(locale_sets[loc] - star)
+      ordered[loc] = sorted(locale_sets.get(loc, set()) - star)
     kaomoji_map[kaomoji] = ordered
 
   return kaomoji_map

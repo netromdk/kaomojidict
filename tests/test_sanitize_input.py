@@ -66,6 +66,30 @@ from tests.helpers import bkd
     {"(◕‿◕)": ["UPPER", "upper", "Upper"]},
     {"(◕‿◕)": ["upper"]},
   ),
+  (
+    {"(◕‿◕)": {"en": ["happy face"], "da": ["happy_face"]}},
+    {"(◕‿◕)": {"en": [], "da": [], "*": ["happyface"]}},
+  ),
+  (
+    {"(◕‿◕)": ["hi there", "hi_there"]},
+    {"(◕‿◕)": ["hithere"]},
+  ),
+  (
+    {"(◕‿◕)": {"en": ["tag-a"], "da": ["tag-a"]}},
+    {"(◕‿◕)": {"en": [], "da": [], "*": ["taga"]}},
+  ),
+  (
+    {"(◕‿◕)": ["let's go"]},
+    {"(◕‿◕)": ["letsgo"]},
+  ),
+  (
+    {"(◕‿◕)": ["cool!", "cool?"]},
+    {"(◕‿◕)": ["cool"]},
+  ),
+  (
+    {"(◕‿◕)": ["!!!", "cool"]},
+    {"(◕‿◕)": ["cool"]},
+  ),
 ])
 def test_sanitize_input(kaomoji, expected):
   result = bkd._sanitize_input(kaomoji)
@@ -143,6 +167,123 @@ def test_sanitize_input_star_first_when_no_shared():
   result = bkd._sanitize_input(kaomoji)
   keys = list(result["(◕‿◕)"].keys())
   assert keys[0] == "*", f"expected '*' first, got {keys}"
+
+
+def test_sanitize_input_flat_all_empty_warning(capsys):
+  kaomoji = {"(◕‿◕)": ["!!!", "?!?"]}
+  result = bkd._sanitize_input(kaomoji)
+  assert not result["(◕‿◕)"]
+  captured = capsys.readouterr()
+  assert "WARNING" in captured.out
+
+
+def test_sanitize_input_dict_all_empty_warning(capsys):
+  kaomoji = {"(◕‿◕)": {"en": ["!!!"], "da": ["?"]}}
+  result = bkd._sanitize_input(kaomoji)
+  assert result["(◕‿◕)"] == {"en": [], "da": []}
+  captured = capsys.readouterr()
+  assert "WARNING" in captured.out
+
+
+def test_sanitize_input_per_tag_warning(capsys):
+  kaomoji = {"(◕‿◕)": {"en": ["!!!", "cool"], "da": ["cool"]}}
+  result = bkd._sanitize_input(kaomoji)
+  captured = capsys.readouterr()
+  assert 'Tag "!!!" for (◕‿◕) (en) became empty' in captured.out
+  assert 'Tag "cool"' not in captured.out
+  assert result["(◕‿◕)"] == {"en": [], "da": [], "*": ["cool"]}
+
+
+def test_sanitize_input_collision_warning(capsys):
+  kaomoji = {"(◕‿◕)": {"en": ["happy!", "happy?"], "da": ["cool"]}}
+  result = bkd._sanitize_input(kaomoji)
+  captured = capsys.readouterr()
+  assert 'collapse to "happy"' in captured.out
+  assert result["(◕‿◕)"] == {"en": ["happy"], "da": ["cool"]}
+
+
+def test_sanitize_input_non_string_tag_warning(capsys):
+  kaomoji = {"(◕‿◕)": {"en": [42, None], "da": ["real"]}}
+  result = bkd._sanitize_input(kaomoji)
+  captured = capsys.readouterr()
+  assert "Non-string tag" in captured.out
+  assert result["(◕‿◕)"] == {"en": [], "da": ["real"]}
+
+
+def test_sanitize_input_bad_entry_type_warning(capsys):
+  kaomoji = {"(◕‿◕)": "just a string"}
+  result = bkd._sanitize_input(kaomoji)
+  captured = capsys.readouterr()
+  assert "neither a list nor a dict" in captured.out
+  assert not result["(◕‿◕)"]
+
+
+def test_sanitize_input_locale_value_not_list_string(capsys):
+  kaomoji = {"(◕‿◕)": {"en": ["good"], "da": "stringval"}}
+  result = bkd._sanitize_input(kaomoji)
+  captured = capsys.readouterr()
+  assert "is not a list" in captured.out
+  assert result["(◕‿◕)"] == {"en": ["good"], "da": []}
+
+
+def test_sanitize_input_locale_value_not_list_int(capsys):
+  kaomoji = {"(◕‿◕)": {"en": ["good"], "da": 42}}
+  result = bkd._sanitize_input(kaomoji)
+  captured = capsys.readouterr()
+  assert "is not a list" in captured.out
+  assert result["(◕‿◕)"] == {"en": ["good"], "da": []}
+
+
+def test_sanitize_input_locale_value_not_list_none(capsys):
+  kaomoji = {"(◕‿◕)": {"en": ["good"], "da": None}}
+  result = bkd._sanitize_input(kaomoji)
+  captured = capsys.readouterr()
+  assert "is not a list" in captured.out
+  assert result["(◕‿◕)"] == {"en": ["good"], "da": []}
+
+
+def test_sanitize_input_star_value_not_list(capsys):
+  kaomoji = {"(◕‿◕)": {"en": ["good"], "*": "notalist"}}
+  result = bkd._sanitize_input(kaomoji)
+  captured = capsys.readouterr()
+  assert "is not a list" in captured.out
+  assert result["(◕‿◕)"] == {"en": ["good"]}
+
+
+def test_sanitize_input_star_only_gets_sanitized():
+  kaomoji = {"(◕‿◕)": {"*": ["RAGE!", "TABLE-FLIP"]}}
+  result = bkd._sanitize_input(kaomoji)
+  assert result["(◕‿◕)"] == {"*": ["rage", "tableflip"]}
+
+
+def test_sanitize_input_unicode_punctuation():
+  kaomoji = {"(◕‿◕)": {"en": ["happy…", "smile—face"]}}
+  result = bkd._sanitize_input(kaomoji)
+  assert result["(◕‿◕)"] == {"en": ["happy", "smileface"]}
+
+
+def test_sanitize_input_unicode_whitespace():
+  kaomoji = {"(◕‿◕)": {"en": ["tag\u00a0name"]}}
+  result = bkd._sanitize_input(kaomoji)
+  assert result["(◕‿◕)"] == {"en": ["tagname"]}
+
+
+def test_sanitize_input_unicode_ideographic_space():
+  kaomoji = {"(◕‿◕)": {"en": ["tag\u3000name"]}}
+  result = bkd._sanitize_input(kaomoji)
+  assert result["(◕‿◕)"] == {"en": ["tagname"]}
+
+
+def test_sanitize_input_unicode_cjk_brackets():
+  kaomoji = {"(◕‿◕)": {"en": ["tag「name」"]}}
+  result = bkd._sanitize_input(kaomoji)
+  assert result["(◕‿◕)"] == {"en": ["tagname"]}
+
+
+def test_sanitize_input_unicode_cross_locale_dedup():
+  kaomoji = {"(◕‿◕)": {"en": ["happy…"], "da": ["happy"]}}
+  result = bkd._sanitize_input(kaomoji)
+  assert result["(◕‿◕)"] == {"en": [], "da": [], "*": ["happy"]}
 
 
 def test_main_sanitize_input_flag(tmp_path):
