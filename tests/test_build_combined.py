@@ -1,3 +1,4 @@
+# pylint: disable=protected-access
 from unittest.mock import patch
 
 from tests.helpers import FREEZE_TS, bkd
@@ -82,3 +83,11 @@ def test_build_combined_dictionary_type():
   header = result.split("\n", maxsplit=1)[0]
   assert "dictionary=kaomoji:en" in header
   assert "emoji:en" not in header
+
+
+def test_build_kaomoji_lines_lowercases_tags():
+  kaomoji_map = {"¯\\_(ツ)_/¯": ["SHRUG", "Shrugging"], "(◕‿◕)": ["HAPPY"]}
+  lines = bkd._build_kaomoji_lines(kaomoji_map)
+  assert f" word=shrug,f={bkd.KAOMOJI_FLAGS},not_a_word=true" in lines
+  assert f" word=shrugging,f={bkd.KAOMOJI_FLAGS},not_a_word=true" in lines
+  assert f" word=happy,f={bkd.KAOMOJI_FLAGS},not_a_word=true" in lines

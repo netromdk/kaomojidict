@@ -130,7 +130,7 @@ def _build_kaomoji_lines(kaomoji_map: dict[str, list[str]]) -> list[str]:
   lines: list[str] = []
   for kaomoji, words in kaomoji_map.items():
     for word in words:
-      lines.append(f" word={word},f={KAOMOJI_FLAGS},not_a_word=true")
+      lines.append(f" word={word.lower()},f={KAOMOJI_FLAGS},not_a_word=true")
       lines.append(f"  shortcut={kaomoji},f={KAOMOJI_FLAGS}")
   return lines
 
