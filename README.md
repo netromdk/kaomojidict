@@ -74,6 +74,14 @@ increment the version in the JSON file after building:
 ./build_kaomoji_dict.py kaomoji.json --locale en --bump
 ```
 
+Unicode Word Joiners (U+2060) are inserted between each character of the
+Kaomoji to attempt to prevent line-breaking in the suggestion strip. Use
+`--no-word-joiner` to disable this.
+
+```sh
+./build_kaomoji_dict.py kaomoji.json --no-word-joiner
+```
+
 Use `--sanitize-input` to clean up the input JSON: lowercase all tags, remove
 duplicates, and promote tags that appear in every locale to the shared `"*"`
 locale:

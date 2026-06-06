@@ -21,7 +21,10 @@ def test_merge_with_combined_basic(tmp_path):
 
   kaomoji = {"¯\\_(ツ)_/¯": ["shrug"]}
   with patch("time.time", return_value=FREEZE_TS):
-    result = bkd.merge_with_combined(kaomoji, str(src), "Kaomoji dictionary")
+    result = bkd.merge_with_combined(
+      kaomoji, str(src), "Kaomoji dictionary",
+      word_joiner=False,
+    )
 
   lines = result.split("\n")
   assert len(lines) == 5
@@ -108,7 +111,9 @@ def test_merge_with_combined_multiple_kaomoji(tmp_path):
 
   kaomoji = {"a": ["x", "y"], "b": ["z"]}
   with patch("time.time", return_value=FREEZE_TS):
-    result = bkd.merge_with_combined(kaomoji, str(src), "Kaomoji")
+    result = bkd.merge_with_combined(
+      kaomoji, str(src), "Kaomoji", word_joiner=False
+    )
 
   lines = result.split("\n")
   assert len(lines) == 8

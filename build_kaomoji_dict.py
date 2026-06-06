@@ -46,6 +46,7 @@ def build_combined(
   description: str = "Kaomoji dictionary",
   version: int = 1,
   date: int | None = None,
+  word_joiner: bool = True,
 ) -> str:
   if date is None:
     date = int(time.time())
@@ -53,7 +54,7 @@ def build_combined(
     f"dictionary=kaomoji:{locale},locale={locale},"
     f"description={description},date={date},version={version}",
   ]
-  lines += _build_kaomoji_lines(kaomoji_map)
+  lines += _build_kaomoji_lines(kaomoji_map, word_joiner=word_joiner)
   return "\n".join(lines)
 
 
@@ -64,6 +65,7 @@ def merge_with_combined(
   version: int = 1,
   all_locales: bool = False,
   date: int | None = None,
+  word_joiner: bool = True,
 ) -> str:
   """Merge kaomoji entries into an existing .combined wordlist file."""
   if date is None:
@@ -101,7 +103,7 @@ def merge_with_combined(
 
   header = _patch_header(header, description=full_desc, date=date, version=version,
                          locale=locale_from_header)
-  kaomoji_lines = _build_kaomoji_lines(kaomoji_map)
+  kaomoji_lines = _build_kaomoji_lines(kaomoji_map, word_joiner=word_joiner)
   existing = lines[1:] if len(lines) > 1 else []
   return "\n".join([header] + existing + kaomoji_lines)
 
@@ -128,12 +130,27 @@ def _patch_header(header: str, description: str, date: int, version: int = 1,
   return ",".join(new_parts)
 
 
-def _build_kaomoji_lines(kaomoji_map: dict[str, list[str]]) -> list[str]:
+def _with_word_joiner(s: str) -> str:
+  """Insert Unicode Word Joiner (U+2060) between each character
+  to prevent the Unicode line breaker from splitting the string.
+  Strips any existing joiners first, making the function idempotent."""
+  s = s.replace("\u2060", "")
+  if len(s) == 0:
+    return s
+  s = "\u2060".join(s)
+  return f"\u2060{s}\u2060"
+
+
+def _build_kaomoji_lines(
+  kaomoji_map: dict[str, list[str]],
+  word_joiner: bool = True,
+) -> list[str]:
   lines: list[str] = []
   for kaomoji, words in kaomoji_map.items():
+    shortcut = _with_word_joiner(kaomoji) if word_joiner else kaomoji
     for word in words:
       lines.append(f" word={word.lower()},f={KAOMOJI_FLAGS},not_a_word=true")
-      lines.append(f"  shortcut={kaomoji},f={KAOMOJI_FLAGS}")
+      lines.append(f"  shortcut={shortcut},f={KAOMOJI_FLAGS}")
   return lines
 
 
@@ -383,6 +400,10 @@ def main() -> None:
     help="Lowercase tags, remove duplicates, promote tags shared by all locales to '*', and exit",
   )
   parser.add_argument(
+    "--no-word-joiner", action="store_true",
+    help="Disable insertion of Unicode Word Joiner (U+2060) between kaomoji characters",
+  )
+  parser.add_argument(
     "-v", "--verbose", action="store_true",
     help="Print the full combined wordlist",
   )
@@ -456,6 +477,7 @@ def main() -> None:
   kaomoji_flat = _extract_tags(kaomoji_map, locale, args.all_locales,
                                no_star=args.no_star_locale)
 
+  use_word_joiner = not args.no_word_joiner
   if args.merge_combined:
     combined_path = Path(args.merge_combined)
     if not combined_path.is_file():
@@ -464,9 +486,11 @@ def main() -> None:
     combined = merge_with_combined(
       kaomoji_flat, str(combined_path), description,
       version=build_version, all_locales=args.all_locales,
+      word_joiner=use_word_joiner,
     )
   else:
-    combined = build_combined(kaomoji_flat, locale, description, build_version)
+    combined = build_combined(kaomoji_flat, locale, description, build_version,
+                              word_joiner=use_word_joiner)
 
   if args.keep_combined:
     combined_out = Path(args.output).with_suffix(".combined")
