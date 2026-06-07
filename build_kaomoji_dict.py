@@ -29,6 +29,7 @@ import sys
 import tempfile
 import time
 from pathlib import Path
+from typing import Any
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 DEFAULT_INPUT = "kaomoji.json"
@@ -222,6 +223,28 @@ def _sanitize_tag(t: str) -> str:
   return "".join(result)
 
 
+def _sanitize_tag_list(tags: list[str], kaomoji: str, loc_label: str = "") -> dict[str, list[str]]:
+  """Sanitize each tag in a list, collect collapse warnings, and return a dict mapping each
+  sanitized form to its original source tags.
+  """
+  result: dict[str, list[str]] = {}
+  prefix = f" for {kaomoji}" + (f" ({loc_label})" if loc_label else "")
+  for t in tags:
+    if not isinstance(t, str):
+      print(f"  WARNING: Non-string tag {repr(t)}{prefix} ignored.")
+      continue
+    s = _sanitize_tag(t)
+    if not s:
+      print(f'  WARNING: Tag "{t}"{prefix} became empty after sanitization.')
+      continue
+    result.setdefault(s, []).append(t)
+
+  for s, sources in result.items():
+    if len(sources) > 1:
+      print(f"  WARNING: Tags {sources}{prefix} all collapse to \"{s}\"")
+  return result
+
+
 def _sanitize_input(
   kaomoji_map: dict[str, list[str] | dict[str, list[str]]],
 ) -> dict[str, list[str] | dict[str, list[str]]]:
@@ -229,21 +252,7 @@ def _sanitize_input(
     locales = kaomoji_map[kaomoji]
 
     if isinstance(locales, list):
-      tag_map: dict[str, list[str]] = {}
-      for t in locales:
-        if not isinstance(t, str):
-          print(f'  WARNING: Non-string tag {repr(t)} for {kaomoji} ignored.')
-          continue
-        s = _sanitize_tag(t)
-        if not s:
-          print(f'  WARNING: Tag "{t}" for {kaomoji} became empty after sanitization.')
-          continue
-        tag_map.setdefault(s, []).append(t)
-
-      for s, sources in tag_map.items():
-        if len(sources) > 1:
-          print(f'  WARNING: Tags {sources} for {kaomoji} all collapse to "{s}"')
-
+      tag_map = _sanitize_tag_list(locales, kaomoji)
       if not tag_map:
         print(
           f"  WARNING: All tags for {kaomoji} were empty after sanitization. "
@@ -271,24 +280,9 @@ def _sanitize_input(
         )
         locale_sets[loc] = set()
         continue
-      tag_map_loc: dict[str, list[str]] = {}
-      for t in tags:
-        if not isinstance(t, str):
-          print(f'  WARNING: Non-string tag {repr(t)} for {kaomoji} ({loc}) ignored.')
-          continue
-        s = _sanitize_tag(t)
-        if not s:
-          print(f'  WARNING: Tag "{t}" for {kaomoji} ({loc}) became empty after sanitization.')
-          continue
-        tag_map_loc.setdefault(s, []).append(t)
+      tag_map = _sanitize_tag_list(tags, kaomoji, loc)
+      locale_sets[loc] = set(tag_map.keys())
 
-      for s, sources in tag_map_loc.items():
-        if len(sources) > 1:
-          print(f'  WARNING: Tags {sources} for {kaomoji} ({loc}) all collapse to "{s}"')
-
-      locale_sets[loc] = set(tag_map_loc.keys())
-
-    tag_map_star: dict[str, list[str]] = {}
     star_raw = locales.get("*")
     if not isinstance(star_raw, list):
       if star_raw is not None:
@@ -297,20 +291,7 @@ def _sanitize_input(
           f"(got {type(star_raw).__name__}), skipping.",
         )
       star_raw = []
-    for t in star_raw:
-      if not isinstance(t, str):
-        print(f'  WARNING: Non-string tag {repr(t)} for {kaomoji} (*) ignored.')
-        continue
-      s = _sanitize_tag(t)
-      if not s:
-        print(f'  WARNING: Tag "{t}" for {kaomoji} (*) became empty after sanitization.')
-        continue
-      tag_map_star.setdefault(s, []).append(t)
-
-    for s, sources in tag_map_star.items():
-      if len(sources) > 1:
-        print(f'  WARNING: Tags {sources} for {kaomoji} (*) all collapse to "{s}"')
-
+    tag_map_star = _sanitize_tag_list(star_raw, kaomoji, "*")
     existing = set(tag_map_star.keys())
 
     if not locale_sets and not existing:
@@ -351,7 +332,109 @@ def _sanitize_input(
   return kaomoji_map
 
 
-def main() -> None:
+def _check_java(args: argparse.Namespace) -> Path:
+  """Verify java is on PATH and the jar exists. Returns resolved jar Path."""
+  if not shutil.which("java"):
+    print("error: 'java' is required but not found on PATH", file=sys.stderr)
+    sys.exit(1)
+
+  jar_path = Path(args.jar)
+  if not jar_path.is_file():
+    msg = f"jar not found: {args.jar}"
+    if args.jar == str(SCRIPT_DIR / "aosp-dictionary-tools" / "dicttool_aosp.jar"):
+      msg += "\nRun: git submodule update --init --recursive"
+    print(f"error: {msg}", file=sys.stderr)
+    sys.exit(1)
+  return jar_path
+
+
+def _load_input(args: argparse.Namespace) -> tuple[dict[str, Any], dict[str, Any]]:
+  """Resolve input path, parse JSON, return (data, kaomoji_map)."""
+  if not args.input:
+    args.input = str(SCRIPT_DIR / DEFAULT_INPUT)
+    print(f"Using default kaomoji set ({args.input})", file=sys.stderr)
+
+  try:
+    with open(args.input, encoding="utf-8") as f:
+      data = json.load(f)
+  except json.JSONDecodeError as e:
+    print(f"error: invalid JSON in {args.input}: {e}", file=sys.stderr)
+    sys.exit(1)
+
+  kaomoji_map = data.get("kaomoji")
+  if not isinstance(kaomoji_map, dict):
+    print("error: input JSON must contain a 'kaomoji' object", file=sys.stderr)
+    sys.exit(1)
+  return data, kaomoji_map
+
+
+def _handle_sanitize(
+    data: dict[str, Any], kaomoji_map: dict[str, Any], args: argparse.Namespace
+) -> None:
+  """If --sanitize-input was passed, sanitize in place and exit."""
+  if not args.sanitize_input:
+    return
+  print("Sanitizing input..")
+  data["kaomoji"] = _sanitize_input(kaomoji_map)
+  print("Saving modified input file..")
+  try:
+    with open(args.input, mode="w", encoding="utf-8") as f:
+      json.dump(data, f, indent=2, ensure_ascii=False)
+  except Exception as ex:
+    print(f"error: failed to write star locales: {ex}", file=sys.stderr)
+    sys.exit(1)
+  sys.exit(0)
+
+
+def _resolve_locale(data: dict[str, Any], args: argparse.Namespace) -> str:
+  locale: str | None = args.locale
+  if locale is not None:
+    return locale
+  return str(data.get("locale") or data.get("locales", ["en"])[0])
+
+
+def _make_output_path(locale: str, args: argparse.Namespace) -> str:
+  output: str | None = args.output
+  if output is not None:
+    return output
+  parts = ["kaomoji", locale]
+  if args.all_locales:
+    parts.append("all_locales")
+  if args.merge_combined:
+    parts.append("combined")
+  return "_".join(parts) + ".dict"
+
+
+def _resolve_version(data: dict[str, Any], args: argparse.Namespace) -> tuple[int, int]:
+  """Return (version, build_version)."""
+  version = data.get("version", args.version)
+  if not isinstance(version, int) or version < 1:
+    version = 1
+  build_version = version + 1 if args.bump else version
+  return version, build_version
+
+
+def _resolve_description(data: dict[str, Any], locale: str, args: argparse.Namespace) -> str:
+  desc_raw = data.get("description", args.description)
+  if isinstance(desc_raw, dict):
+    loc = data.get("locales", [None])[0]
+    fallback: str = args.description
+    if loc is not None:
+      fallback = desc_raw.get(loc, args.description)
+    return str(desc_raw.get(locale, fallback))
+  return str(desc_raw)
+
+
+def _bump_version(data: dict[str, Any], build_version: int, input_path: str) -> None:
+  """Write bumped version back to the input JSON file."""
+  data["version"] = build_version
+  with open(input_path, "w", encoding="utf-8") as f:
+    json.dump(data, f, indent=2, ensure_ascii=False)
+    f.write("\n")
+  print(f"Bumped {input_path} version to {build_version}")
+
+
+def _build_arg_parser() -> argparse.ArgumentParser:
   parser = argparse.ArgumentParser(description="Build kaomoji dictionary for HeliBoard")
   parser.add_argument("input", nargs="?", help="Input JSON file with kaomoji data")
   parser.add_argument(
@@ -407,77 +490,24 @@ def main() -> None:
     "-v", "--verbose", action="store_true",
     help="Print the full combined wordlist",
   )
+  return parser
 
-  args = parser.parse_args()
 
-  if not shutil.which("java"):
-    print("error: 'java' is required but not found on PATH", file=sys.stderr)
-    sys.exit(1)
+def main() -> None:
+  args = _build_arg_parser().parse_args()
+  _check_java(args)
+  data, kaomoji_map = _load_input(args)
+  _handle_sanitize(data, kaomoji_map, args)
 
-  jar_path = Path(args.jar)
-  if not jar_path.is_file():
-    msg = f"jar not found: {args.jar}"
-    if args.jar == str(SCRIPT_DIR / "aosp-dictionary-tools" / "dicttool_aosp.jar"):
-      msg += "\nRun: git submodule update --init --recursive"
-    print(f"error: {msg}", file=sys.stderr)
-    sys.exit(1)
-
-  if not args.input:
-    args.input = str(SCRIPT_DIR / DEFAULT_INPUT)
-    print(f"Using default kaomoji set ({args.input})", file=sys.stderr)
-
-  try:
-    with open(args.input, encoding="utf-8") as f:
-      data = json.load(f)
-  except json.JSONDecodeError as e:
-    print(f"error: invalid JSON in {args.input}: {e}", file=sys.stderr)
-    sys.exit(1)
-  kaomoji_map = data.get("kaomoji")
-  if not isinstance(kaomoji_map, dict):
-    print("error: input JSON must contain a 'kaomoji' object", file=sys.stderr)
-    sys.exit(1)
-
-  if args.sanitize_input:
-    print("Sanitizing input..")
-    data["kaomoji"] = _sanitize_input(kaomoji_map)
-    print("Saving modified input file..")
-    try:
-      with open(args.input, mode="w", encoding="utf-8") as f:
-        json.dump(data, f, indent=2, ensure_ascii=False)
-    except Exception as ex:
-      print(f"error: failed to write star locales: {ex}", file=sys.stderr)
-      sys.exit(1)
-    sys.exit(0)
-
-  locale = args.locale if args.locale is not None else (
-    data.get("locale") or data.get("locales", ["en"])[0]
-  )
-
-  if args.output is None:
-    suffix = ""
-    if args.all_locales:
-      suffix = "_all_locales"
-    if args.merge_combined:
-      suffix += "_combined"
-    args.output = f"kaomoji_{locale}{suffix}.dict"
-
-  version = data.get("version", args.version)
-  if not isinstance(version, int) or version < 1:
-    version = 1
-  build_version = version + 1 if args.bump else version
-
-  desc_raw = data.get("description", args.description)
-  description: str
-  if isinstance(desc_raw, dict):
-    fallback = desc_raw.get(data.get("locales", [None])[0], args.description)
-    description = desc_raw.get(locale, fallback)
-  else:
-    description = desc_raw
+  locale = _resolve_locale(data, args)
+  args.output = _make_output_path(locale, args)
+  _, build_version = _resolve_version(data, args)
+  description = _resolve_description(data, locale, args)
 
   kaomoji_flat = _extract_tags(kaomoji_map, locale, args.all_locales,
                                no_star=args.no_star_locale)
-
   use_word_joiner = not args.no_word_joiner
+
   if args.merge_combined:
     combined_path = Path(args.merge_combined)
     if not combined_path.is_file():
@@ -509,11 +539,7 @@ def main() -> None:
     sys.exit(1)
 
   if args.bump:
-    data["version"] = build_version
-    with open(args.input, "w", encoding="utf-8") as f:
-      json.dump(data, f, indent=2, ensure_ascii=False)
-      f.write("\n")
-    print(f"Bumped {args.input} version to {build_version}")
+    _bump_version(data, build_version, args.input)
 
 
 if __name__ == "__main__":
