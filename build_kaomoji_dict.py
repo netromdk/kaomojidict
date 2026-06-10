@@ -47,7 +47,7 @@ def build_combined(
   description: str = "Kaomoji dictionary",
   version: int = 1,
   date: int | None = None,
-  word_joiner: bool = True,
+  word_joiner: bool = False,
 ) -> str:
   if date is None:
     date = int(time.time())
@@ -66,7 +66,7 @@ def merge_with_combined(
   version: int = 1,
   all_locales: bool = False,
   date: int | None = None,
-  word_joiner: bool = True,
+  word_joiner: bool = False,
 ) -> str:
   """Merge kaomoji entries into an existing .combined wordlist file."""
   if date is None:
@@ -144,7 +144,7 @@ def _with_word_joiner(s: str) -> str:
 
 def _build_kaomoji_lines(
   kaomoji_map: dict[str, list[str]],
-  word_joiner: bool = True,
+  word_joiner: bool = False,
 ) -> list[str]:
   lines: list[str] = []
   for kaomoji, words in kaomoji_map.items():
@@ -483,8 +483,8 @@ def _build_arg_parser() -> argparse.ArgumentParser:
     help="Lowercase tags, remove duplicates, promote tags shared by all locales to '*', and exit",
   )
   parser.add_argument(
-    "--no-word-joiner", action="store_true",
-    help="Disable insertion of Unicode Word Joiner (U+2060) between kaomoji characters",
+    "--word-joiner", action="store_true",
+    help="Enable insertion of Unicode Word Joiner (U+2060) between kaomoji characters",
   )
   parser.add_argument(
     "-v", "--verbose", action="store_true",
@@ -506,7 +506,7 @@ def main() -> None:
 
   kaomoji_flat = _extract_tags(kaomoji_map, locale, args.all_locales,
                                no_star=args.no_star_locale)
-  use_word_joiner = not args.no_word_joiner
+  use_word_joiner = args.word_joiner
 
   if args.merge_combined:
     combined_path = Path(args.merge_combined)
