@@ -12,13 +12,23 @@ if [ ! -f "$json" ]; then
   exit 1
 fi
 
-locales=$(jq -r '.locales[]' "$json")
+locales=$(python3 -c "
+import json, sys
+data = json.load(open('$json'))
+for loc in data['locales']:
+    print(loc)
+")
 
 for locale in $locales; do
   # Locale-specific tags only.
   dict="kaomoji_${locale}.dict"
-  old=$([[ -f "$dict" ]] && stat -c %Y "$dict" || echo 0)
-  src_old=$(stat -c %Y "$json")
+  old=$(python3 -c "
+import os.path
+p = '$dict'; print(int(os.path.getmtime(p)) if os.path.exists(p) else 0)
+")
+  src_old=$(python3 -c "
+import os.path; print(int(os.path.getmtime('$json')))
+")
 
   if [ "$old" -ge "$src_old" ]; then
     echo "$dict is up to date, skipping"
@@ -33,7 +43,10 @@ for locale in $locales; do
 
   # All locales' tags merged.
   dict_all="kaomoji_${locale}_all_locales.dict"
-  old_all=$([[ -f "$dict_all" ]] && stat -c %Y "$dict_all" || echo 0)
+  old_all=$(python3 -c "
+import os.path
+p = '$dict_all'; print(int(os.path.getmtime(p)) if os.path.exists(p) else 0)
+")
 
   if [ "$old_all" -ge "$src_old" ]; then
     echo "$dict_all is up to date, skipping"
