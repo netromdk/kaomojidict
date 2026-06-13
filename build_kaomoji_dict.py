@@ -21,6 +21,7 @@ If no input file is given, kaomoji_en.json is used as the default.
 
 import argparse
 import json
+import re
 import shutil
 import string
 import unicodedata
@@ -39,6 +40,10 @@ NOT_A_WORD = 2  # Entry is a shortcut, not a real word.
 HAS_EMOJI = 4   # Render the shortcut content inline in suggestions.
 PROBING = 8     # Include in suggestion-bar probing.
 KAOMOJI_FLAGS = NOT_A_WORD | HAS_EMOJI | PROBING
+
+# Regex to split combined-file headers on commas that separate known fields, correctly handling
+# commas inside values like descriptions.
+_HEADER_RE = re.compile(r",(?=(?:description|date|version|dictionary|locale)=)")
 
 
 def build_combined(
@@ -79,15 +84,17 @@ def merge_with_combined(
   with open(combined, encoding="utf-8") as f:
     content = f.read()
 
-  lines = content.rstrip("\n").split("\n")
-  if not lines or not lines[0].strip():
-    raise ValueError("Empty combined file")
-
-  header = lines[0]
+  parts = _HEADER_RE.split(header_line)
+  for part in parts:
+    if "=" not in part:
+      raise ValueError(
+        f"Malformed header part {part!r} in {combined_path}. "
+        "This may indicate an unexpected comma in a header value."
+      )
   orig_desc = ""
   orig_version = None
   locale_from_header = ""
-  for part in header.split(","):
+  for part in parts:
     if part.startswith("description="):
       orig_desc = part.split("=", 1)[1]
     elif part.startswith("version="):
@@ -102,16 +109,15 @@ def merge_with_combined(
     else description
   )
 
-  header = _patch_header(header, description=full_desc, date=date, version=version,
+  header = _patch_header(header_line, description=full_desc, date=date, version=version,
                          locale=locale_from_header)
   kaomoji_lines = _build_kaomoji_lines(kaomoji_map, word_joiner=word_joiner)
-  existing = lines[1:] if len(lines) > 1 else []
   return "\n".join([header] + existing + kaomoji_lines)
 
 
 def _patch_header(header: str, description: str, date: int, version: int = 1,
                   locale: str | None = None) -> str:
-  parts = header.split(",")
+  parts = _HEADER_RE.split(header)
   seen_version = False
   new_parts = []
   for part in parts:

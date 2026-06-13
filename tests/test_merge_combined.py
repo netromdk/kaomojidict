@@ -84,6 +84,22 @@ def test_merge_with_combined_errors(tmp_path, content, error_cls, pattern):
     bkd.merge_with_combined({"foo": ["bar"]}, path)
 
 
+def test_merge_with_combined_comma_in_description(tmp_path):
+  """Commas inside description values must not break header parsing."""
+  src = tmp_path / "test.combined"
+  src.write_text(
+    "dictionary=emoji:en,locale=en,description=Hello, world,date=1,version=1\n"
+    " word=test,f=100\n",
+    encoding="utf-8",
+  )
+  with patch("time.time", return_value=FREEZE_TS):
+    result = bkd.merge_with_combined(
+      {"foo": ["bar"]}, str(src), "Kaomoji", word_joiner=False
+    )
+  header = result.split("\n", maxsplit=1)[0]
+  assert "description=Kaomoji (Hello, world v1)" in header
+
+
 def test_merge_with_combined_no_existing_entries(tmp_path):
   src = tmp_path / "header_only.combined"
   src.write_text(
