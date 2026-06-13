@@ -423,7 +423,8 @@ def _resolve_version(data: dict[str, Any], args: argparse.Namespace) -> tuple[in
 def _resolve_description(data: dict[str, Any], locale: str, args: argparse.Namespace) -> str:
   desc_raw = data.get("description", args.description)
   if isinstance(desc_raw, dict):
-    loc = data.get("locales", [None])[0]
+    locales_list: list[str] = data.get("locales", [])
+    loc = locales_list[0] if locales_list else None
     fallback: str = args.description
     if loc is not None:
       fallback = desc_raw.get(loc, args.description)

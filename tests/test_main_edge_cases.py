@@ -114,3 +114,24 @@ def test_main_version_defaults_to_one_when_bumped(tmp_path, input_overrides):
 
   updated = json.loads(input_file.read_text(encoding="utf-8"))
   assert updated["version"] == 2
+
+
+def test_main_empty_locales_list(tmp_path):
+  """Empty locales list must not crash _resolve_description."""
+  input_file = tmp_path / "test.json"
+  input_file.write_text(json.dumps({
+    "locales": [],
+    "description": {"en": "English", "da": "Dansk"},
+    "kaomoji": {"(ツ)": ["test"]},
+  }), encoding="utf-8")
+
+  mock_run = MagicMock(return_value=_cp())
+  with patch("sys.argv", [
+    "build_kaomoji_dict.py", str(input_file),
+    "--locale", "en", "-o", str(tmp_path / "out.dict"),
+    "--jar", str(tmp_path / "dummy.jar"),
+  ]), patch("shutil.which", return_value="/usr/bin/java"), \
+      patch("pathlib.Path.is_file", return_value=True), \
+      patch("subprocess.run", mock_run), \
+      patch("time.time", return_value=FREEZE_TS):
+    bkd.main()
