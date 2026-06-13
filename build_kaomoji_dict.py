@@ -82,7 +82,11 @@ def merge_with_combined(
     raise FileNotFoundError(f"Combined file not found: {combined_path}")
 
   with open(combined, encoding="utf-8") as f:
-    content = f.read()
+    header_line = f.readline()
+    if not header_line or not header_line.strip():
+      raise ValueError("Empty combined file")
+    header_line = header_line.rstrip("\n")
+    existing = [line.rstrip("\n") for line in f]
 
   parts = _HEADER_RE.split(header_line)
   for part in parts:

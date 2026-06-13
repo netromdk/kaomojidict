@@ -100,6 +100,25 @@ def test_merge_with_combined_comma_in_description(tmp_path):
   assert "description=Kaomoji (Hello, world v1)" in header
 
 
+def test_merge_with_combined_large_file(tmp_path):
+  """Streaming merge must handle thousands of existing lines."""
+  src = tmp_path / "large.combined"
+  n_existing = 10000
+  header = "dictionary=emoji:en,locale=en,description=Large,date=1,version=1"
+  lines = [header] + [f" word={i},f=100" for i in range(n_existing)]
+  src.write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+  kaomoji = {"(ツ)": ["test"]}
+  with patch("time.time", return_value=FREEZE_TS):
+    result = bkd.merge_with_combined(
+      kaomoji, str(src), "Kaomoji", word_joiner=False
+    )
+
+  result_lines = result.split("\n")
+  assert len(result_lines) == 1 + n_existing + 2
+  assert result_lines[-1] == f"  shortcut=(ツ),f={bkd.KAOMOJI_FLAGS}"
+
+
 def test_merge_with_combined_no_existing_entries(tmp_path):
   src = tmp_path / "header_only.combined"
   src.write_text(
